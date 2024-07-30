@@ -94,7 +94,11 @@ namespace DynamicArrays
 		}
 		public bool IsEmpty() 
 		{
-			throw new NotImplementedException();
+			if (Count > 0)
+				return false;
+			if (Count == 0)
+				return true;
+			throw new ArgumentOutOfRangeException(paramName: "Count", message:"DynamicArray Count property is negative");
 		}
 		public override string ToString() 
 		{
