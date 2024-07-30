@@ -5,9 +5,10 @@
 		static void Main(string[] args)
 		{
 			DynamicArray dynamicArray = new DynamicArray();
-			dynamicArray.add("A");
-			dynamicArray.add("B");
-			dynamicArray.add("C");
+			dynamicArray.Add("A");
+			dynamicArray.Add("B");
+			dynamicArray.Add("C");
+			dynamicArray.Insert(3,"D");
 			Console.WriteLine(dynamicArray);
 		}
 	}

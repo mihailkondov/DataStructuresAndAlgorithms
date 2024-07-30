@@ -21,26 +21,40 @@ namespace DynamicArrays
             this.array = new object[capacity];
         }
 
-		public void add(object data) 
+		public void Add(object data) 
 		{ 
 			if(this.Count >= capacity)
 			{
-				this.grow();
+				this.Grow();
 			}
 			array[Count] = data;
 			this.Count++;
 		}
-		public void insert(int  index, object data) 
+		public void Insert(int  index, object data) 
 		{
-			
+            if (index > this.Count || index < 0)
+            {
+				throw new ArgumentOutOfRangeException();
+            }
+            if (this.Count == capacity)
+			{
+				this.Grow();
+			}
+
+			for(int i = this.Count; i > index; i--)
+			{
+				array[i] = array[i - 1];
+			}
+			array[index] = data;
+			this.Count++;
 		} 
-		public void delete(object data) { }
-		public int search(object data) 
+		public void Delete(object data) { }
+		public int Search(object data) 
 		{
 			throw new NotImplementedException();
 		}
-		private void grow() { }
-		private void shrink() { }
+		private void Grow() { }
+		private void Shrink() { }
 		public bool IsEmpty() 
 		{
 			throw new NotImplementedException();
