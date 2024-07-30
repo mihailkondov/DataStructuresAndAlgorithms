@@ -1,4 +1,4 @@
-﻿namespace DynamicArrays
+﻿namespace LinearDataStructures
 {
 	internal class Program
 	{

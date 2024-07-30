@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DynamicArrays
+namespace LinearDataStructures
 {
 	internal class DynamicArray
 	{
