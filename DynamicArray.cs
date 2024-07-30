@@ -74,7 +74,15 @@ namespace DynamicArrays
 		}
 		public int Search(object data) 
 		{
-			throw new NotImplementedException();
+			for (int i = 0; i < Count; i++) 
+			{
+				if (array[i].Equals(data))
+				{
+					return i;
+				}
+			}
+
+			return -1;
 		}
 		private void Grow() { }
 		private void Shrink() { }

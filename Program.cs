@@ -15,6 +15,9 @@
 			Console.WriteLine(dynamicArray);
             Console.WriteLine("Capacity: {0}", dynamicArray.capacity);
             Console.WriteLine("Size: {0}", dynamicArray.Count);
+
+			Console.WriteLine("Index of B is " + dynamicArray.Search("B"));
+			Console.WriteLine("Index of X is " + dynamicArray.Search("X"));
         }
 	}
 }
