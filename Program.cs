@@ -18,6 +18,21 @@
 
 			Console.WriteLine("Index of B is " + dynamicArray.Search("B"));
 			Console.WriteLine("Index of X is " + dynamicArray.Search("X"));
+
+            Console.WriteLine("Testing capacity grow/shrink methods:");
+			dynamicArray.Delete("B");
+			dynamicArray.Delete("C");
+			dynamicArray.Delete("D");
+			Console.WriteLine(dynamicArray);
+            Console.WriteLine($"Deleted 4 items. Capacity is {dynamicArray.capacity}. Count: {dynamicArray.Count}");
+			dynamicArray.Add("A");
+			dynamicArray.Add("B");
+			dynamicArray.Add("C");
+			dynamicArray.Add("D");
+			dynamicArray.Add("E");
+			dynamicArray.Add("F");
+            Console.WriteLine(dynamicArray);
+            Console.WriteLine($"Added 6 elements. Capacity is {dynamicArray.capacity}. Count: {dynamicArray.Count}");
         }
 	}
 }

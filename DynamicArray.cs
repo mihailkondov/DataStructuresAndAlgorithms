@@ -84,8 +84,14 @@ namespace DynamicArrays
 
 			return -1;
 		}
-		private void Grow() { }
-		private void Shrink() { }
+		private void Grow() 
+		{
+			capacity *= 2;
+		}
+		private void Shrink() 
+		{
+			capacity /= 2;
+		}
 		public bool IsEmpty() 
 		{
 			throw new NotImplementedException();
