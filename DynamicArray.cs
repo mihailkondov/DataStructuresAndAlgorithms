@@ -112,5 +112,55 @@ namespace DynamicArrays
 			result += "]";
 			return result;
 		}
+
+		public static void Demo()
+		{
+			Console.WriteLine("S T A R T I N G   Dynamic Array Demo:" + Environment.NewLine);
+			DynamicArray dynamicArray = new DynamicArray();
+			dynamicArray.Add("A");
+			dynamicArray.Add("B");
+			dynamicArray.Add("C");
+			dynamicArray.Insert(3, "D");
+			dynamicArray.Insert(4, "E");
+			dynamicArray.Delete("A");
+			dynamicArray.Delete("E");
+			Console.WriteLine(dynamicArray);
+			Console.WriteLine("Capacity: {0}", dynamicArray.capacity);
+			Console.WriteLine("Size: {0}", dynamicArray.Count);
+
+			Console.WriteLine("Index of B is " + dynamicArray.Search("B"));
+			Console.WriteLine("Index of X is " + dynamicArray.Search("X"));
+
+			Console.WriteLine("Testing capacity grow/shrink methods:");
+			dynamicArray.Delete("B");
+			dynamicArray.Delete("C");
+			dynamicArray.Delete("D");
+			Console.WriteLine(dynamicArray);
+			Console.WriteLine($"Deleted 4 items. Capacity is {dynamicArray.capacity}. Count: {dynamicArray.Count}");
+			dynamicArray.Add("A");
+			dynamicArray.Add("B");
+			dynamicArray.Add("C");
+			dynamicArray.Add("D");
+			dynamicArray.Add("E");
+			dynamicArray.Add("F");
+			Console.WriteLine(dynamicArray);
+			Console.WriteLine($"Added 6 elements. Capacity is {dynamicArray.capacity}. Count: {dynamicArray.Count}");
+			Console.WriteLine($"The array is empty: {dynamicArray.IsEmpty()}");
+			Console.WriteLine();
+
+			Console.WriteLine("Removing all elements...");
+			dynamicArray.Delete("A");
+			dynamicArray.Delete("B");
+			dynamicArray.Delete("C");
+			dynamicArray.Delete("D");
+			dynamicArray.Delete("E");
+			dynamicArray.Delete("F");
+			Console.WriteLine(dynamicArray);
+			Console.WriteLine($"The array is empty: {dynamicArray.IsEmpty()}");
+
+			Console.WriteLine(Environment.NewLine + "F I N I S H E D   Dynamic Array Demo Finished." + Environment.NewLine);
+
+		}
+
 	}
 }
