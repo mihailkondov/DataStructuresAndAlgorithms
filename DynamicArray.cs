@@ -48,7 +48,30 @@ namespace DynamicArrays
 			array[index] = data;
 			this.Count++;
 		} 
-		public void Delete(object data) { }
+		public void Delete(object data)
+		{
+			int index = -1;
+			for(int i = 0; i < this.Count; i++)
+			{
+				if (array[i] == data)
+				{
+					index = i; 
+					break;	
+				}
+			}
+			if(index > -1)
+			{
+				for(int i = index; i < this.Count - 1; i++)
+				{
+					array[i] = array[i + 1];
+				}
+				this.Count--;
+				if (Count < capacity / 3)
+				{
+					Shrink();
+				}
+			}
+		}
 		public int Search(object data) 
 		{
 			throw new NotImplementedException();
