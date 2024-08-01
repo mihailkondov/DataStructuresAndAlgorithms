@@ -17,6 +17,8 @@ namespace LinearDataStructures.DoublyLinkedList
             Head = null;
         }
 
+        public int Count { get; private set; } = 0;
+
         public void Add(T data)
         {
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, null, null);
@@ -37,6 +39,7 @@ namespace LinearDataStructures.DoublyLinkedList
                 current = new DoublyLinkedListNode<T>(data, previous, null);
                 previous.Next = current;
 			}
+            Count++;
 
         } //Done
 
@@ -57,12 +60,14 @@ namespace LinearDataStructures.DoublyLinkedList
 					if (Head.Next == null) //List of only 1 node
 					{
 						Head = null;
+                        Count--;
 						return;
 					}
 
 					if (current.Next == null) // Deleting the last node
                     {
 						current.Previous.Next = null;
+                        Count--;
                         return;
 					}
                     else
@@ -77,6 +82,7 @@ namespace LinearDataStructures.DoublyLinkedList
 							current.Previous.Next = current.Next;
 							current.Next.Previous = current.Previous;
 						}
+                        Count--;
 						return;
 					}
 				}
@@ -109,7 +115,7 @@ namespace LinearDataStructures.DoublyLinkedList
             }
 
             return -1;
-        }
+        }//Done
 
         public void Insert(int index, T data)
         {
