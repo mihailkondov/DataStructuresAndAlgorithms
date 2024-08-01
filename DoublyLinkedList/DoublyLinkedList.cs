@@ -42,7 +42,47 @@ namespace LinearDataStructures.DoublyLinkedList
 
         public void Delete(T data)
         {
-            throw new NotImplementedException();
+            if(Head == null)
+            {
+                return;
+            }
+
+  
+
+            DoublyLinkedListNode<T> current = Head;
+            while(current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+					if (Head.Next == null) //List of only 1 node
+					{
+						Head = null;
+						return;
+					}
+
+					if (current.Next == null) // Deleting the last node
+                    {
+						current.Previous.Next = null;
+                        return;
+					}
+                    else
+                    {
+						if (current.Previous == null) //Deleting the first node
+						{
+							Head = current.Next;
+							current.Next.Previous = null;
+						}
+						else //Deleting middle node (most common case)
+						{
+							current.Previous.Next = current.Next;
+							current.Next.Previous = current.Previous;
+						}
+						return;
+					}
+				}
+                current = current.Next;
+            }
+            
         }
 
         public int Search(T data)
@@ -88,15 +128,22 @@ namespace LinearDataStructures.DoublyLinkedList
         }
         public static void Demo(T[] data)
         {
+            int deletedNodeIndex = data.Length-1;
+
             Console.WriteLine("S T A R T I N G Doubly Linked List test:");
             Console.WriteLine("Creating list...");
             DoublyLinkedList<T> list = new DoublyLinkedList<T>();
             Console.WriteLine(list);
             Console.WriteLine("Adding elements to the list");
-            for(int i = 0; i<data.Length; i++)
+            for(int i = 0; i<data.Length-1; i++)
             {
                 list.Add(data[i]);
             }
+
+            Console.WriteLine(list);
+            Console.WriteLine($"Deleting element equal to {data[deletedNodeIndex]}...");
+            list.Delete(data[deletedNodeIndex]);
+            Console.WriteLine("Delete method finished");
             Console.WriteLine(list);
 
         }
