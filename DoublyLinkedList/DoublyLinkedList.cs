@@ -38,7 +38,7 @@ namespace LinearDataStructures.DoublyLinkedList
                 previous.Next = current;
 			}
 
-        }
+        } //Done
 
         public void Delete(T data)
         {
@@ -83,11 +83,32 @@ namespace LinearDataStructures.DoublyLinkedList
                 current = current.Next;
             }
             
-        }
+        } //Done
 
         public int Search(T data)
         {
-            throw new NotImplementedException();
+            if (Head == null) return -1;
+            
+            DoublyLinkedListNode<T> current = Head;
+            int index = 0;
+            while (current != null)
+            {
+                if(current.Data == null)
+                {
+                    if(data == null)
+                    {
+                        return index;
+                    }
+                    return -1;
+                }
+                
+                if (current.Data.Equals(data)) return index;
+
+                current = current.Next;
+                index++;
+            }
+
+            return -1;
         }
 
         public void Insert(int index, T data)
@@ -125,8 +146,8 @@ namespace LinearDataStructures.DoublyLinkedList
             result += Environment.NewLine;
             result += "Previous: " + previousString + "]";
             return result;
-        }
-        public static void Demo(T[] data)
+        } //Done
+        public static void Demo(T[] data) //This part should be replaced by unit tests
         {
             int deletedNodeIndex = data.Length-1;
 
@@ -145,6 +166,20 @@ namespace LinearDataStructures.DoublyLinkedList
             list.Delete(data[deletedNodeIndex]);
             Console.WriteLine("Delete method finished");
             Console.WriteLine(list);
+            Console.WriteLine("Searching for elements");
+            for(int i = 0; i < data.Length; i++)
+            {
+                Console.Write($"Looking for index of {data[i]}... ");
+                int found = list.Search(data[i]);
+                if (found > -1)
+                {
+                    Console.WriteLine($"Found at index {found}");
+                }
+                else
+                {
+                    Console.WriteLine($"Not found (returned index {found})");
+                }
+            }
 
         }
     }

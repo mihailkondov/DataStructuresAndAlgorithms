@@ -7,7 +7,7 @@ namespace LinearDataStructures
 		static void Main(string[] args)
 		{
 			//DynamicArray.Demo();
-			DoublyLinkedList<int>.Demo(new int[]{ 100, 20, 15 });
+			DoublyLinkedList<int>.Demo(new int[]{ 100, 20, 15, 1432 });
         }
 	}
 }
