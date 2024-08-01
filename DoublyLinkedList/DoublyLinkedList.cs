@@ -119,8 +119,40 @@ namespace LinearDataStructures.DoublyLinkedList
 
         public void Insert(int index, T data)
         {
-            throw new NotImplementedException();
-        }
+            if(Count-1 < index || index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+
+            int currentIndex = 0;
+            DoublyLinkedListNode<T> current = Head;
+            while(current != null)
+            {
+                if (currentIndex == index - 1)
+                {
+                    DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, current, null);
+
+                    if(currentIndex != Count - 1)
+                    {
+                        newNode.Next = current.Next;
+                        current.Next.Previous = newNode;
+                    }
+                    current.Next = newNode;
+                    Count++;
+
+                    return;
+                }
+                current = current.Next;
+                currentIndex++;
+            }
+
+			if (Head == null)
+			{
+				Head = new DoublyLinkedListNode<T>(data, null, null);
+                Count++;
+			}
+		} //Done
 
         public override string ToString()
         {
@@ -150,7 +182,8 @@ namespace LinearDataStructures.DoublyLinkedList
             string previousString = previous.ToString().TrimEnd(' ', ',');
             result += "]";
             result += Environment.NewLine;
-            result += "Previous: " + previousString + "]";
+            result += "Previous: " + previousString + "]" + Environment.NewLine + "Count: " + Count;
+
             return result;
         } //Done
         public static void Demo(T[] data) //This part should be replaced by unit tests
@@ -186,6 +219,10 @@ namespace LinearDataStructures.DoublyLinkedList
                     Console.WriteLine($"Not found (returned index {found})");
                 }
             }
+            Console.WriteLine($"Inserting element {data[deletedNodeIndex]} at position {deletedNodeIndex-1}");
+            list.Insert(deletedNodeIndex-1, data[deletedNodeIndex]);
+            Console.WriteLine(list);
+
 
         }
     }
