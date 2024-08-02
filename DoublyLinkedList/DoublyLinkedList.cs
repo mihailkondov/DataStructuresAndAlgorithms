@@ -41,7 +41,7 @@ namespace LinearDataStructures.DoublyLinkedList
 			}
             Count++;
 
-        } //Done
+        }
 
         public void Delete(T data)
         {
@@ -89,7 +89,7 @@ namespace LinearDataStructures.DoublyLinkedList
                 current = current.Next;
             }
             
-        } //Done
+        }
 
         public int Search(T data)
         {
@@ -115,44 +115,62 @@ namespace LinearDataStructures.DoublyLinkedList
             }
 
             return -1;
-        }//Done
+        }
 
         public void Insert(int index, T data)
         {
-            if(Count-1 < index || index < 0)
+            DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, null, null);
+            
+            //Check if index is valid
+            if(index > Count || index < 0)
             {
-                throw new IndexOutOfRangeException();
+               throw new IndexOutOfRangeException();
             }
 
-
-            int currentIndex = 0;
-            DoublyLinkedListNode<T> current = Head;
-            while(current != null)
-            {
-                if (currentIndex == index - 1)
+			//check if 0 (inserting at the beginning of the list)
+			if (index == 0)
+			{
+                if (Head == null)
                 {
-                    DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, current, null);
+                    Add(data);
+                    return;
+                }
 
-                    if(currentIndex != Count - 1)
-                    {
-                        newNode.Next = current.Next;
-                        current.Next.Previous = newNode;
-                    }
-                    current.Next = newNode;
+				newNode.Next = Head;
+				Head.Previous = newNode;
+				Head = newNode;
+				Count++;
+				return;
+			}
+
+			//check if inserting at the end
+			if (index == Count)
+			{
+				this.Add(data);
+				return;
+			}
+
+
+			//Insert in the middle:
+			int currentIndex = 0;
+            DoublyLinkedListNode<T> current = Head;
+            while(current != null) 
+            {
+                //If this part is running list can't be empty;
+                if (currentIndex == index)
+                {
+                    newNode.Next = current;
+                    newNode.Previous = current.Previous;
+                    current.Previous.Next = newNode;
+                    newNode.Next.Previous = newNode;
+
                     Count++;
-
                     return;
                 }
                 current = current.Next;
                 currentIndex++;
             }
-
-			if (Head == null)
-			{
-				Head = new DoublyLinkedListNode<T>(data, null, null);
-                Count++;
-			}
-		} //Done
+		} 
 
         public override string ToString()
         {
@@ -185,7 +203,7 @@ namespace LinearDataStructures.DoublyLinkedList
             result += "Previous: " + previousString + "]" + Environment.NewLine + "Count: " + Count;
 
             return result;
-        } //Done
+        } 
         public static void Demo(T[] data) //This part should be replaced by unit tests
         {
             int deletedNodeIndex = data.Length-1;
