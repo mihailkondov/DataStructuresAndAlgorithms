@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//1793
 namespace LinearDataStructures.DoublyLinkedList
 {
     public class DoublyLinkedList<T>: IBasics<T>
@@ -204,11 +203,11 @@ namespace LinearDataStructures.DoublyLinkedList
 
             return result;
         } 
-        public static void Demo(T[] data) //This part should be replaced by unit tests
+        public static void Demo(T[] data) 
         {
             int deletedNodeIndex = data.Length-1;
 
-            Console.WriteLine("S T A R T I N G Doubly Linked List test:");
+            Console.WriteLine("S T A R T I N G Doubly Linked List DEMO:");
             Console.WriteLine("Creating list...");
             DoublyLinkedList<T> list = new DoublyLinkedList<T>();
             Console.WriteLine(list);
@@ -241,7 +240,9 @@ namespace LinearDataStructures.DoublyLinkedList
             list.Insert(deletedNodeIndex-1, data[deletedNodeIndex]);
             Console.WriteLine(list);
 
-
+            Console.WriteLine("E N D   -doubly linked list demo finished");
+            Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }
