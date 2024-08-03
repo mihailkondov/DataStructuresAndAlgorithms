@@ -9,9 +9,29 @@ namespace LinearDataStructures.Stack
 {
 	public class DynamicStack<T> : IStack<T>
 	{
-		DynamicStackNode<T> ?Top = null;
 
-		public T Peek()
+        public DynamicStack()
+        {
+            Count = 0;
+        }
+
+        public DynamicStack(T data)
+        {
+			Push(data);
+        }
+
+		public DynamicStack(T[] dataArray)
+		{
+			for(int i = 0; i<dataArray.Length; i++)
+			{
+				Push(dataArray[i]);
+			}
+		}
+
+		public DynamicStackNode<T>? Top { get; private set; } = null;
+        public int Count { get; private set; }
+
+        public T Peek()
 		{
 			if (Top == null) throw new InvalidOperationException("Stack is empty");
 
@@ -25,6 +45,7 @@ namespace LinearDataStructures.Stack
 			T data = Top.Data;
 			if(Top.Next != null)
 				Top = Top.Next;
+			Count--;
 			return data;
 		}
 
@@ -33,6 +54,7 @@ namespace LinearDataStructures.Stack
 			DynamicStackNode<T> newNode = new DynamicStackNode<T>(data);
 			newNode.Next = Top;
 			Top = newNode;
+			Count++;
 		}
 	}
 }
