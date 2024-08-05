@@ -102,5 +102,16 @@ namespace Tests
 			listInt.Insert(0, 200);
 			Assert.That(listInt.Head.Data == 200);
 		}
+
+		[Test]
+		public void Enumerator()
+		{
+			Assert.That(listInt[0] == integers[0]);
+			Assert.That(listInt[listInt.Count-1] == integers[integers.Length-1]);
+
+			Assert.Throws<IndexOutOfRangeException>(()=> { var value = listInt[-1]; }, "Index cannot be negative");
+
+			Assert.Throws<IndexOutOfRangeException>(()=> { var value = listInt[listInt.Count]; }, "Index out of range");
+		}
 	}
 }

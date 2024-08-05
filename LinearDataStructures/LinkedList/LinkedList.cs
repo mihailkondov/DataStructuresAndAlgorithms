@@ -1,5 +1,6 @@
 ﻿//TODO: Make the linked List generic and implement enumerators
 using LinearDataStructures.Interfaces;
+using System.Runtime.InteropServices;
 
 namespace LinearDataStructures
 {
@@ -10,9 +11,30 @@ namespace LinearDataStructures
 			Head = null;
 		}
 
-		public LinkedListNode<T>? Head { get; private set; }
 		public int Count { get; private set; } = 0;
+		public LinkedListNode<T>? Head { get; private set; }
 
+		public T this[int index]
+		{
+			get
+			{
+				if (index < 0) throw new IndexOutOfRangeException("Index cannot be negative");
+
+				int i = 0;
+				LinkedListNode<T> node = Head;
+				while (i < Count)
+				{
+					if(i == index)
+					{
+						return node.Data;
+					}
+					i++;
+					node = node.Next;
+				}
+
+				throw new IndexOutOfRangeException("Index out of range");
+			}
+		}
 		public void Add(T data)
 		{
 			if (Head == null)
@@ -63,6 +85,7 @@ namespace LinearDataStructures
 			Head = null;
 			Count = 0;
 		}
+
 		public void Print()
 		{
 			Console.WriteLine($"Printing list with {this.Count} members:");
@@ -74,6 +97,7 @@ namespace LinearDataStructures
 				current = current.Next;
 			}
 		}
+
 		public void Reverse()
 		{
 			Console.WriteLine("Reversing list...");
@@ -90,7 +114,6 @@ namespace LinearDataStructures
 				current = savedNext;
 			}
 		}
-
 
 		public int Search(T data)
 		{
