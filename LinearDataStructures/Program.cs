@@ -1,4 +1,4 @@
-﻿using LinearDataStructures.DoublyLinkedList;
+﻿using LinearDataStructures.LinkedList;
 
 namespace LinearDataStructures
 {

@@ -1,10 +1,10 @@
 ﻿//TODO: Make the linked List generic and implement enumerators
-using LinearDataStructures.Interfaces;
+using LinearDataStructures.LinkedList;
 using System.Runtime.InteropServices;
 
 namespace LinearDataStructures
 {
-	public class LinkedList<T> : IBasics<T>
+    public class LinkedList<T> : IBasics<T>
 	{
 		public LinkedList()
 		{

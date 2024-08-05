@@ -1,8 +1,8 @@
-using LinearDataStructures.DoublyLinkedList;
+using LinearDataStructures.LinkedList;
 
 namespace Tests
 {
-	public class DoublyLinkedListTest
+    public class DoublyLinkedListTest
 	{
 		DoublyLinkedList<int> listInt;
 		DoublyLinkedList<object> listObj;

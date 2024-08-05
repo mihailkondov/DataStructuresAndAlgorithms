@@ -9,7 +9,6 @@ namespace LinearDataStructures.Stack
 {
 	public class DynamicStack<T> : IStack<T>
 	{
-
         public DynamicStack()
         {
             Count = 0;
