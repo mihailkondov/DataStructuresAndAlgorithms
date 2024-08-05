@@ -23,6 +23,15 @@ namespace Tests
 		}
 
 		[Test]
+		public void Enumerator()
+		{
+			Assert.That(populatedList[0] == numbers[0]);
+			Assert.That(populatedList[4] == numbers[4]);
+			Assert.Throws<IndexOutOfRangeException>(() => { var value = populatedList[-1]; });
+			Assert.Throws<IndexOutOfRangeException>(() => { var value = populatedList[numbers.Count]; });
+		}
+
+		[Test]
 		public void Add()
 		{
 			var whatever = new { sfd = "dd", mhm="ok", somethingelse= 3, gotit= 4 };

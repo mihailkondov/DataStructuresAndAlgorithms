@@ -17,6 +17,32 @@ namespace LinearDataStructures.LinkedList
 
         public int Count { get; private set; } = 0;
 
+        public T this[int index]
+        {
+            get
+            {
+                if(index < 0)
+                {
+                    throw new IndexOutOfRangeException("Invalid index (index must be a positive integer or zero)");
+                }
+
+                int i = 0;
+                DoublyLinkedListNode<T> current = this.Head;
+                while(current != null)
+                {
+                    if(i == index)
+                    {
+                        return current.Data;
+                    }
+
+                    i++;
+                    current = current.Next;
+                }
+
+                throw new IndexOutOfRangeException();
+            }
+        }
+
         public void Add(T data)
         {
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, null, null);
