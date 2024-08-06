@@ -109,5 +109,34 @@ namespace Tests
 			Assert.That(listInt.Count == count);
 
 		}
+
+		[Test]
+		public void RemoveAt()
+		{
+			//Delete first
+			populatedList.RemoveAt(0);
+			Assert.That(populatedList.Count == numbers.Count - 1);
+			Assert.That(populatedList.Head.Data == numbers[1]);
+
+			//Delete in the middle
+			populatedList.RemoveAt(1);
+			Assert.That(populatedList.Count == numbers.Count - 2);
+			Assert.That(populatedList[0] == numbers[1]);
+			Assert.That(populatedList[1] == numbers[3]);
+
+			//Delete last
+			populatedList.RemoveAt(numbers.Count - 3);
+			Assert.That(populatedList.Count == numbers.Count - 3);
+			Assert.That(populatedList[0] == numbers[1]);
+			Assert.That(populatedList[1] == numbers[3]);
+
+
+			//Index out of bounds (too high)
+			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(2), "Position doesn't exist on the list");
+
+			//Index is negative
+			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(-1), "Index cannot be negative");
+
+		}
 	}
 }

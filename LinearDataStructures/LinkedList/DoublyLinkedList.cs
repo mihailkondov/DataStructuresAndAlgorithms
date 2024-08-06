@@ -74,8 +74,6 @@ namespace LinearDataStructures.LinkedList
                 return;
             }
 
-
-
             DoublyLinkedListNode<T> current = Head;
             while (current != null)
             {
@@ -193,6 +191,46 @@ namespace LinearDataStructures.LinkedList
                 }
                 current = current.Next;
                 currentIndex++;
+            }
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0)
+                throw new IndexOutOfRangeException("Index cannot be negative");
+
+            if (index >= Count) 
+                throw new IndexOutOfRangeException("Position doesn't exist on the list");
+
+            int i = 0;
+            DoublyLinkedListNode<T> current = Head;
+
+            while(current != null)
+            {
+                if (i == index)
+                {
+                    if(current.Previous == null) // Case deleting first member
+                    {
+                        Head = current.Next;
+                        if(Head != null) // Case first member is not the last member as well
+                        {
+                            Head.Previous = null;
+                        }
+                    }
+                    else // Deleting middle / last member:
+                    {
+						current.Previous.Next = current.Next;
+                        if(current.Next != null) // Case not deleting last member:
+                        {
+                            current.Next.Previous = current.Previous;
+                        }
+					}
+
+                    Count--;
+                }
+
+                i++;
+                current = current.Next;
             }
         }
 
