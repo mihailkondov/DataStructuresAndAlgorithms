@@ -1,10 +1,12 @@
 ﻿//TODO: Make the linked List generic and implement enumerators
 using LinearDataStructures.LinkedList;
+using System.Collections;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace LinearDataStructures
 {
-    public class LinkedList<T> : IBasics<T>
+	public class LinkedList<T> : IBasics<T>, IEnumerable<T>
 	{
 		public LinkedList()
 		{
@@ -12,8 +14,10 @@ namespace LinearDataStructures
 		}
 
 		public int Count { get; private set; } = 0;
+
 		public LinkedListNode<T>? Head { get; private set; }
 
+		//Indexer
 		public T this[int index]
 		{
 			get
@@ -173,6 +177,42 @@ namespace LinearDataStructures
 				currentNode = currentNode.Next;
 			}
 			currentNode.Next = new LinkedListNode<T>(data);
+		}
+
+		//IEnumerable implementation
+		public IEnumerator<T> GetEnumerator()
+		{
+			LinkedListNode<T> current = this.Head;
+			while (current != null)
+			{
+				yield return current.Data;
+				current = current.Next;
+			}
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
+
+		public static void Demo()
+		{
+			LinkedList<int> list = new LinkedList<int>();
+			list.Add(100);
+			list.Add(200);
+			list.Add(300);
+
+            Console.WriteLine("S T A R T I N G Linked List Demo");
+            Console.WriteLine("Foreach loop works because IEnumerable is implemented:");
+            foreach (int i in list)
+			{
+				Console.WriteLine(i);
+			}
+            Console.WriteLine("For loop works with just the indexer:");
+            for (int i = 0; i < list.Count; i++)
+			{
+				Console.WriteLine(list[i]);
+			}
 		}
 	}
 }
