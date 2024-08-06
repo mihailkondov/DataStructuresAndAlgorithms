@@ -1,8 +1,6 @@
 ﻿//TODO: Make the linked List generic and implement enumerators
 using LinearDataStructures.LinkedList;
 using System.Collections;
-using System.Runtime.InteropServices;
-using System.Security;
 
 namespace LinearDataStructures
 {
@@ -39,6 +37,7 @@ namespace LinearDataStructures
 				throw new IndexOutOfRangeException("Index out of range");
 			}
 		}
+
 		public void Add(T data)
 		{
 			if (Head == null)
