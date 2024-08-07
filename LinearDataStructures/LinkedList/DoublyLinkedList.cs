@@ -248,7 +248,24 @@ namespace LinearDataStructures.LinkedList
             }
         }
 
-        public override string ToString()
+		public void AddFirst(T data)
+        {
+            Insert(0, data);
+        }
+        public void AddLast(T data)
+        { 
+            Insert(Count, data);
+        }
+		public void AddBefore(T find, T data)
+        {
+            Insert(Search(find), data);
+        }
+		public void AddAfter(T find, T data)
+        {
+			Insert(Search(find) + 1, data);
+		}
+
+		public override string ToString()
         {
             StringBuilder sb = new StringBuilder("[");
             StringBuilder previous = new StringBuilder("[");
@@ -281,6 +298,7 @@ namespace LinearDataStructures.LinkedList
 
             return result;
         }
+
         public static void Demo(T[] data)
         {
             int deletedNodeIndex = data.Length - 1;

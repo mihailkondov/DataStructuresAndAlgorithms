@@ -3,6 +3,7 @@
 	internal class LinkedListTest
 	{
 		LinearDataStructures.LinkedList<int> listInt;
+		LinearDataStructures.LinkedList<int> listEmpty;
 		int[] integers =  [ 1, 2, 3, 4, 5, 6, 7, 8 ];
 		[SetUp]
 		public void Setup()
@@ -12,6 +13,8 @@
 			{
 				listInt.Add(integers[i]);
 			}
+
+			listEmpty = new LinearDataStructures.LinkedList<int>();
 		}
 
 		[Test]
@@ -105,6 +108,51 @@
 			Assert.Throws<IndexOutOfRangeException>(()=> { var value = listInt[-1]; }, "Index cannot be negative");
 
 			Assert.Throws<IndexOutOfRangeException>(()=> { var value = listInt[listInt.Count]; }, "Index out of range");
+		}
+
+		[Test]
+		public void AddLast()
+		{
+			listEmpty.AddLast(100);
+			Assert.That(listEmpty.Count == 1);
+			Assert.That(listEmpty.Head.Data == 100);
+
+			listEmpty.AddLast(200);
+			Assert.That(listEmpty.Count == 2);
+			Assert.That(listEmpty.Head.Next.Data == 200);
+
+			listInt.AddLast(1337);
+			Assert.That(listInt[8] == 1337);
+			Assert.That(listInt.Count == 9);
+		}
+
+		[Test]
+		public void AddFirst()
+		{
+			listEmpty.AddFirst(123);
+			Assert.That(listEmpty.Head.Data == 123);
+
+			listEmpty.AddFirst(3210);
+			Assert.That(listEmpty.Head.Data == 3210);
+		}
+
+		[Test]
+		public void AddBefore()
+		{
+			listInt.AddBefore(3, 999);
+			Assert.That(listInt.Count == 9);
+			Assert.That(listInt.Head.Next.Next.Data == 999);
+			Assert.That(listInt.Head.Next.Next.Next.Data == 3);
+		}
+
+		[Test]
+		public void AddAfter()
+		{
+			listInt.AddAfter(2, 999);
+			Assert.That(listInt.Count == 9);
+			Assert.That(listInt.Head.Next.Data == 2);
+			Assert.That(listInt.Head.Next.Next.Data == 999);
+			Assert.That(listInt.Head.Next.Next.Next.Data == 3);
 		}
 	}
 }

@@ -146,36 +146,58 @@ namespace LinearDataStructures
 
 		public void Insert(int index, T data)
 		{
-			if (index == 0)
-			{
-				this.Head = new LinkedListNode<T> ( data );
-				return;
-			}
-
-			if(this.Head == null)
+			if (index > Count)
 			{
 				throw new ArgumentOutOfRangeException();
 			}
 
+			if(this.Head == null)
+			{
+				this.Head = new LinkedListNode<T>(data);
+				Count = 1;
+				return;
+			}
+
 			int currentIndex = 0;
 			LinkedListNode<T> currentNode = this.Head;
-			while(currentIndex < index)
+			LinkedListNode<T> newNode;
+			while (currentIndex < index)
 			{
 				currentIndex++;
-				if(currentNode.Next  == null)
+				if(currentIndex == index)
 				{
-					if(currentIndex == index)
-					{
-						currentNode.Next = new LinkedListNode<T>(data);
-					}
-					else
-					{
-						throw new ArgumentOutOfRangeException();
-					}
+					newNode = new LinkedListNode<T>(data);
+					newNode.Next = currentNode.Next;
+					currentNode.Next = newNode;
+					Count++;
+					return;
 				}
+				
 				currentNode = currentNode.Next;
 			}
-			currentNode.Next = new LinkedListNode<T>(data);
+
+			//Case Inserting at position 0
+			newNode = new LinkedListNode<T>(data);
+			newNode.Next = Head;
+			Head = newNode;
+			Count++;
+		}
+
+		public void AddFirst(T data)
+		{
+			Insert(0, data);
+		}
+		public void AddLast(T data)
+		{
+			Insert(Count, data);
+		}
+		public void AddBefore(T find, T data)
+		{
+			Insert(Search(find), data);
+		}
+		public void AddAfter(T find, T data)
+		{
+			Insert(Search(find) + 1, data);
 		}
 
 		//IEnumerable implementation

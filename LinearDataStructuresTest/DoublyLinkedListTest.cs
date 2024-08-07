@@ -189,5 +189,50 @@ namespace Tests
 			//Index is negative
 			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(-1), "Index cannot be negative");
 		}
+
+		[Test]
+		public void AddLast() 
+		{
+			listInt.AddLast(100);
+			Assert.That(listInt.Count == 1);
+			Assert.That(listInt.Head.Data == 100);
+
+			listInt.AddLast(200);
+			Assert.That(listInt.Count == 2);
+			Assert.That(listInt.Head.Next.Data == 200);
+
+			populatedList.AddLast(1337);
+			Assert.That(populatedList.Tail.Data == 1337);
+			Assert.That(populatedList.Count == 6);
+		}
+
+		[Test]
+		public void AddFirst() 
+		{
+			listInt.AddFirst(123);
+			Assert.That(listInt.Head.Data == 123);
+
+			listInt.AddFirst(3210);
+			Assert.That(listInt.Head.Data == 3210);
+		}
+
+		[Test]
+		public void AddBefore() 
+		{
+			populatedList.AddBefore(200, 999);
+			Assert.That(populatedList.Count == 6);
+			Assert.That(populatedList.Head.Next.Next.Data == 999);
+			Assert.That(populatedList.Head.Next.Next.Next.Data == 200);
+		}
+		
+		[Test]
+		public void AddAfter() 
+		{
+			populatedList.AddAfter(100, 999);
+			Assert.That(populatedList.Count == 6);
+			Assert.That(populatedList.Head.Next.Data == 100);
+			Assert.That(populatedList.Head.Next.Next.Data == 999);
+			Assert.That(populatedList.Head.Next.Next.Next.Data == 200);
+		}
 	}
 }
