@@ -9,6 +9,7 @@ namespace LinearDataStructures.LinkedList
     public class DoublyLinkedList<T> : IBasics<T>
     {
         public DoublyLinkedListNode<T>? Head;
+        public DoublyLinkedListNode<T>? Tail;
 
         public DoublyLinkedList()
         {
@@ -49,6 +50,7 @@ namespace LinearDataStructures.LinkedList
             if (Head == null)
             {
                 Head = newNode;
+                Tail = newNode;
             }
             else
             {
@@ -62,9 +64,10 @@ namespace LinearDataStructures.LinkedList
                 }
                 current = new DoublyLinkedListNode<T>(data, previous, null);
                 previous.Next = current;
+                Tail = current;
             }
-            Count++;
 
+            Count++;
         }
 
         public void Delete(T data)
@@ -82,12 +85,14 @@ namespace LinearDataStructures.LinkedList
                     if (Head.Next == null) //List of only 1 node
                     {
                         Head = null;
+                        Tail = null;
                         Count--;
                         return;
                     }
 
                     if (current.Next == null) // Deleting the last node
                     {
+                        Tail = current.Previous;
                         current.Previous.Next = null;
                         Count--;
                         return;
@@ -212,17 +217,26 @@ namespace LinearDataStructures.LinkedList
                     if(current.Previous == null) // Case deleting first member
                     {
                         Head = current.Next;
-                        if(Head != null) // Case first member is not the last member as well
+
+                        if(Head == null) // List had only 1 member
                         {
-                            Head.Previous = null;
-                        }
+                            Tail = Head;
+						}
+						else //List had more than 1 members
+                        {
+							Head.Previous = null;
+						}
                     }
                     else // Deleting middle / last member:
                     {
 						current.Previous.Next = current.Next;
                         if(current.Next != null) // Case not deleting last member:
                         {
-                            current.Next.Previous = current.Previous;
+                            current.Next.Previous = current.Previous; 
+                        }
+                        else // Deleting last member
+                        {
+                            Tail = current.Previous;
                         }
 					}
 
@@ -262,7 +276,8 @@ namespace LinearDataStructures.LinkedList
             string previousString = previous.ToString().TrimEnd(' ', ',');
             result += "]";
             result += Environment.NewLine;
-            result += "Previous: " + previousString + "]" + Environment.NewLine + "Count: " + Count;
+            result += "Count: " + Count + " Head: " + Head + " Tail: " + Tail + Environment.NewLine;
+            result += "Previous: " + previousString + "]" + Environment.NewLine;
 
             return result;
         }
@@ -299,6 +314,7 @@ namespace LinearDataStructures.LinkedList
                     Console.WriteLine($"Not found (returned index {found})");
                 }
             }
+            Console.WriteLine();
             Console.WriteLine($"Inserting element {data[deletedNodeIndex]} at position {deletedNodeIndex - 1}");
             list.Insert(deletedNodeIndex - 1, data[deletedNodeIndex]);
             Console.WriteLine(list);
