@@ -41,13 +41,22 @@ namespace Tests
 			Assert.That(listObj.Head.Previous == null);
 
 			listInt.Add(numbers[0]);
+			Assert.That(listInt.Head.Data == listInt.Tail.Data && listInt.Head.Data == numbers[0]);
+			
 			listInt.Add(numbers[1]);
+			Assert.That(listInt.Head.Data == numbers[0]);
+			Assert.That(listInt.Tail.Data == numbers[1]);
+
+
 			listInt.Add(numbers[2]);
+			Assert.That(listInt.Head.Data == numbers[0]);
+			Assert.That(listInt.Tail.Data == numbers[2]);
 			listInt.Add(numbers[3]);
 
 			Assert.That(listInt.Head.Data == numbers[0]);
-		}
+			Assert.That(listInt.Tail.Data == numbers[3]);
 
+		}
 
 		[Test]
 		public void Delete()
@@ -55,18 +64,45 @@ namespace Tests
 			populatedList.Delete(numbers[1]);
 			Assert.That(populatedList.Head.Data == numbers[0]);
 			Assert.That(populatedList.Head.Next.Data == numbers[2]);
+			Assert.That(populatedList.Tail.Data == numbers[4]);
+		}
+
+		[Test]
+		public void DeleteFirst()
+		{
+			populatedList.Delete(numbers[0]);
+			Assert.That(populatedList.Head.Data == numbers[1]);
+			Assert.That(populatedList.Tail.Data == numbers[numbers.Count - 1]);
+			Assert.That(populatedList.Count == numbers.Count - 1);
+		}
+
+		[Test]
+		public void DeleteLast()
+		{
+			populatedList.Delete(numbers[numbers.Count-1]);
+			Assert.That(populatedList.Head.Data == numbers[0]);
+			Assert.That(populatedList.Tail.Data == numbers[numbers.Count - 2]);
+			Assert.That(populatedList.Count == numbers.Count - 1);
 		}
 
 		[Test]
 		public void Insert()
 		{
-			listInt.Insert(0, numbers[0]);
-			listInt.Insert(1, numbers[1]);
-			populatedList.Insert(1, numbers[3]);
+			listInt.Insert(0, numbers[0]);  //Insert First
+			listInt.Insert(1, numbers[1]); //Insert Last
+			populatedList.Insert(1, numbers[3]); //Insert Middle
 
 			Assert.That(listInt.Head.Data == numbers[0]);
 			Assert.That(listInt.Head.Next.Data == numbers[1]);
 			Assert.That(populatedList.Head.Next.Data == numbers[3]);
+
+			Assert.That(listInt.Count == 2);
+			Assert.That(populatedList.Count == 6);
+			Assert.That(listInt.Head.Data == numbers[0]);
+			Assert.That(listInt.Tail.Data == numbers[1]);
+
+			Assert.That(populatedList.Head.Data == numbers[0]);
+			Assert.That(populatedList.Tail.Data == numbers[4]);
 			
 		}
 
@@ -111,32 +147,47 @@ namespace Tests
 		}
 
 		[Test]
-		public void RemoveAt()
+		public void RemoveAtFirst()
 		{
-			//Delete first
+			//Remove first member
 			populatedList.RemoveAt(0);
-			Assert.That(populatedList.Count == numbers.Count - 1);
-			Assert.That(populatedList.Head.Data == numbers[1]);
+			Assert.That(populatedList.Count == numbers.Count - 1); //Count changed
+			Assert.That(populatedList.Head.Data == numbers[1]); //Head was moved
+		}
 
-			//Delete in the middle
+		[Test]
+		public void RemoveAtMiddle()
+		{
+			//Remove from the middle
 			populatedList.RemoveAt(1);
-			Assert.That(populatedList.Count == numbers.Count - 2);
-			Assert.That(populatedList[0] == numbers[1]);
-			Assert.That(populatedList[1] == numbers[3]);
+			Assert.That(populatedList.Count == numbers.Count - 1);
+			Assert.That(populatedList[0] == numbers[0]);
+			Assert.That(populatedList[1] == numbers[2]);
+			Assert.That(populatedList.Head.Data == numbers[0]); //Head unchanged
+			Assert.That(populatedList.Tail.Data == numbers[numbers.Count - 1]); //Tail unchanged
+		}
 
-			//Delete last
-			populatedList.RemoveAt(numbers.Count - 3);
-			Assert.That(populatedList.Count == numbers.Count - 3);
-			Assert.That(populatedList[0] == numbers[1]);
-			Assert.That(populatedList[1] == numbers[3]);
+		[Test]
+		public void RemoveAtLast()
+		{
+			//Remove last member
+			populatedList.RemoveAt(numbers.Count - 1);
+			Assert.That(populatedList.Count == numbers.Count - 1);  //Count changes
+			Assert.That(populatedList[0] == numbers[0]);
+			Assert.That(populatedList[1] == numbers[1]);
+			Assert.That(populatedList[2] == numbers[2]);
+			Assert.That(populatedList[3] == numbers[3]);
+			Assert.That(populatedList.Tail.Data == numbers[3]); //Tail was moved
+		}
 
-
+		[Test]
+		public void RemoveAtThrows() 
+		{ 
 			//Index out of bounds (too high)
-			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(2), "Position doesn't exist on the list");
+			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(5), "Position doesn't exist on the list");
 
 			//Index is negative
 			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(-1), "Index cannot be negative");
-
 		}
 	}
 }
