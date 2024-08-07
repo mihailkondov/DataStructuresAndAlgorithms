@@ -68,8 +68,6 @@ namespace LinearDataStructures.Queue
 			T result = list[0];
 			list.RemoveAt(0);
 
-			
-
 			if(Count == 0)
 			{
 				Oldest = null;
