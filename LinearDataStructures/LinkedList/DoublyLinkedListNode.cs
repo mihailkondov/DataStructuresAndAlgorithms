@@ -23,5 +23,10 @@ namespace LinearDataStructures.LinkedList
             Previous = previous;
             Next = next;
         }
-    }
+
+		public override string ToString()
+		{
+            return $"{Data}";
+		}
+	}
 }
