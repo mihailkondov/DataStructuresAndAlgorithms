@@ -46,7 +46,7 @@ namespace LinearDataStructures.Stack
 			_capacity /= 2;
 			_dataArray = new T[_capacity];
 
-			for (int i = 0; i < temporary.Length; i++)
+			for (int i = 0; i < _dataArray.Length; i++)
 			{
 				_dataArray[i] = temporary[i];
 			}
