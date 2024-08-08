@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace LinearDataStructures.LinkedList
 {
-    public class DoublyLinkedList<T> : IBasics<T>
+	public class DoublyLinkedList<T> : IBasics<T>
     {
         public DoublyLinkedListNode<T>? Head;
         public DoublyLinkedListNode<T>? Tail;

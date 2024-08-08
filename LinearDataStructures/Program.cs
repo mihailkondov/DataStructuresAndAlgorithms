@@ -1,5 +1,4 @@
 ﻿using LinearDataStructures.Demos;
-using LinearDataStructures.LinkedList;
 
 namespace LinearDataStructures
 {

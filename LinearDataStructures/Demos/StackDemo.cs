@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Text;
 using LinearDataStructures.Stack;
 
 namespace LinearDataStructures.Demos
 {
-    internal class StackDemo : IRunable
+	internal class StackDemo : IRunable
     {
         string expression = "12 - sqrt( 12 * (1 + 2) / 2 - (1 + 3))";
         StaticStack<string> expressionsStack = new StaticStack<string>();

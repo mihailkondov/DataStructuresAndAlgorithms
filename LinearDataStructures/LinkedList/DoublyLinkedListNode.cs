@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LinearDataStructures.LinkedList
+﻿namespace LinearDataStructures.LinkedList
 {
-    public class DoublyLinkedListNode<T>
+	public class DoublyLinkedListNode<T>
     {
         public T? Data { get; set; }
         public DoublyLinkedListNode<T>? Next { get; set; } = null;
