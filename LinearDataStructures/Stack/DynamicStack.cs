@@ -27,8 +27,9 @@ namespace LinearDataStructures.Stack
 			}
 		}
 
-		public DynamicStackNode<T>? Top { get; private set; } = null;
         public int Count { get; private set; }
+
+		public DynamicStackNode<T>? Top { get; private set; } = null;
 
         public T Peek()
 		{
