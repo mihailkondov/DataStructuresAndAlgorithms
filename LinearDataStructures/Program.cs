@@ -1,4 +1,5 @@
-﻿using LinearDataStructures.LinkedList;
+﻿using LinearDataStructures.Demos;
+using LinearDataStructures.LinkedList;
 
 namespace LinearDataStructures
 {
@@ -7,8 +8,16 @@ namespace LinearDataStructures
 		static void Main(string[] args)
 		{
 			//DynamicArray.Demo();
-			DoublyLinkedList<int>.Demo(new int[]{ 100, 20, 15, 1432 });
+			//DoublyLinkedList<int>.Demo(new int[]{ 100, 20, 15, 1432 });
 
+			LinkedList<IRunable> list = new LinkedList<IRunable>();
+			IRunable stackDemo = new StackDemo();
+			list.Add(stackDemo);
+
+			foreach (IRunable item in list)
+			{
+				item.Run();
+			}
         }
 	}
 }
