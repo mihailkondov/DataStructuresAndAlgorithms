@@ -1,13 +1,13 @@
 ﻿namespace LinearDataStructures
 {
-	public class LinkedListNode<T>
+	public class ListLinkedNode<T>
 	{
-		public LinkedListNode(T data)
+		public ListLinkedNode(T data)
 		{
 			Data = data;
 			Next = null;
 		}
 		public T Data { get; set; }
-		public LinkedListNode<T>? Next { get; set; }
+		public ListLinkedNode<T>? Next { get; set; }
 	}
 }

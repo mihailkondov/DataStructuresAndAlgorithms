@@ -2,20 +2,20 @@
 
 namespace LinearDataStructures.Queue
 {
-	public class DynamicQueue<T>
+	public class QueueDynamic<T> : IQueue<T>
 	{
-		private DoublyLinkedList<T> list;
-		private DoublyLinkedListNode<T>? Oldest;
-		private DoublyLinkedListNode<T>? Newest;
+		private ListDoublyLinked<T> list;
+		private ListDoublyLinkedNode<T>? Oldest;
+		private ListDoublyLinkedNode<T>? Newest;
 
-        public DynamicQueue()
+        public QueueDynamic()
         {
-            list = new DoublyLinkedList<T> ();
+            list = new ListDoublyLinked<T> ();
 			Oldest = list.Head;
 			Newest = list.Head;
         }
 
-        public DynamicQueue(T data) : this() 
+        public QueueDynamic(T data) : this() 
         {
 			list.Add(data);
         }

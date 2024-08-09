@@ -2,12 +2,12 @@
 
 namespace LinearDataStructures.LinkedList
 {
-	public class DoublyLinkedList<T> : IBasics<T>
+	public class ListDoublyLinked<T> : IListBasics<T>
     {
-        public DoublyLinkedListNode<T>? Head;
-        public DoublyLinkedListNode<T>? Tail;
+        public ListDoublyLinkedNode<T>? Head;
+        public ListDoublyLinkedNode<T>? Tail;
 
-        public DoublyLinkedList()
+        public ListDoublyLinked()
         {
             Head = null;
         }
@@ -24,7 +24,7 @@ namespace LinearDataStructures.LinkedList
                 }
 
                 int i = 0;
-                DoublyLinkedListNode<T> current = this.Head;
+                ListDoublyLinkedNode<T> current = this.Head;
                 while(current != null)
                 {
                     if(i == index)
@@ -42,7 +42,7 @@ namespace LinearDataStructures.LinkedList
 
         public void Add(T data)
         {
-            DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, null, null);
+            ListDoublyLinkedNode<T> newNode = new ListDoublyLinkedNode<T>(data, null, null);
             if (Head == null)
             {
                 Head = newNode;
@@ -50,15 +50,15 @@ namespace LinearDataStructures.LinkedList
             }
             else
             {
-                DoublyLinkedListNode<T>? current = Head;
-                DoublyLinkedListNode<T>? previous = null;
+                ListDoublyLinkedNode<T>? current = Head;
+                ListDoublyLinkedNode<T>? previous = null;
 
                 while (current != null)
                 {
                     previous = current;
                     current = current.Next;
                 }
-                current = new DoublyLinkedListNode<T>(data, previous, null);
+                current = new ListDoublyLinkedNode<T>(data, previous, null);
                 previous.Next = current;
                 Tail = current;
             }
@@ -73,7 +73,7 @@ namespace LinearDataStructures.LinkedList
                 return;
             }
 
-            DoublyLinkedListNode<T> current = Head;
+            ListDoublyLinkedNode<T> current = Head;
             while (current != null)
             {
                 if (current.Data.Equals(data))
@@ -118,7 +118,7 @@ namespace LinearDataStructures.LinkedList
         {
             if (Head == null) return -1;
 
-            DoublyLinkedListNode<T> current = Head;
+            ListDoublyLinkedNode<T> current = Head;
             int index = 0;
             while (current != null)
             {
@@ -142,7 +142,7 @@ namespace LinearDataStructures.LinkedList
 
         public void Insert(int index, T data)
         {
-            DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(data, null, null);
+            ListDoublyLinkedNode<T> newNode = new ListDoublyLinkedNode<T>(data, null, null);
 
             //Check if index is valid
             if (index > Count || index < 0)
@@ -176,7 +176,7 @@ namespace LinearDataStructures.LinkedList
 
             //Insert in the middle:
             int currentIndex = 0;
-            DoublyLinkedListNode<T> current = Head;
+            ListDoublyLinkedNode<T> current = Head;
             while (current != null)
             {
                 //If this part is running list can't be empty;
@@ -204,7 +204,7 @@ namespace LinearDataStructures.LinkedList
                 throw new IndexOutOfRangeException("Position doesn't exist on the list");
 
             int i = 0;
-            DoublyLinkedListNode<T> current = Head;
+            ListDoublyLinkedNode<T> current = Head;
 
             while(current != null)
             {
@@ -266,7 +266,7 @@ namespace LinearDataStructures.LinkedList
             StringBuilder sb = new StringBuilder("[");
             StringBuilder previous = new StringBuilder("[");
 
-            DoublyLinkedListNode<T>? current = Head;
+            ListDoublyLinkedNode<T>? current = Head;
 
             while (current != null)
             {
@@ -301,7 +301,7 @@ namespace LinearDataStructures.LinkedList
 
             Console.WriteLine("S T A R T I N G Doubly Linked List DEMO:");
             Console.WriteLine("Creating list...");
-            DoublyLinkedList<T> list = new DoublyLinkedList<T>();
+            ListDoublyLinked<T> list = new ListDoublyLinked<T>();
             Console.WriteLine(list);
             Console.WriteLine("Adding elements to the list");
             for (int i = 0; i < data.Length - 1; i++)

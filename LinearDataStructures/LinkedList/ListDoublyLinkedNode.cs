@@ -1,17 +1,17 @@
 ﻿namespace LinearDataStructures.LinkedList
 {
-	public class DoublyLinkedListNode<T>
+	public class ListDoublyLinkedNode<T>
     {
         public T? Data { get; set; }
-        public DoublyLinkedListNode<T>? Next { get; set; } = null;
-        public DoublyLinkedListNode<T>? Previous { get; set; } = null;
+        public ListDoublyLinkedNode<T>? Next { get; set; } = null;
+        public ListDoublyLinkedNode<T>? Previous { get; set; } = null;
 
-        public DoublyLinkedListNode()
+        public ListDoublyLinkedNode()
         {
             Next = null;
             Previous = null;
         }
-        public DoublyLinkedListNode(T data, DoublyLinkedListNode<T> previous, DoublyLinkedListNode<T> next)
+        public ListDoublyLinkedNode(T data, ListDoublyLinkedNode<T> previous, ListDoublyLinkedNode<T> next)
         {
             Data = data;
             Previous = previous;

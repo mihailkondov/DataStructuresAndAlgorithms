@@ -1,6 +1,6 @@
 ﻿namespace LinearDataStructures.Queue
 {
-	public class StaticQueue<T> : IQueue<T>
+	public class QueueStatic<T> : IQueue<T>
 	{
 		static int _initialCapacity = 2;
 		private T[] _dataArray = new T[_initialCapacity];

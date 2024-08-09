@@ -1,46 +1,45 @@
 ﻿using LinearDataStructures.Stack;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Tests
 {
-	public class DynamicStackTest
+	internal class TestStackStatic
 	{
-		DynamicStack<int> stack;
+		StackStatic<int> stack;
 		[SetUp]
-		public void Setup() 
+		public void Setup()
 		{
-			stack = new DynamicStack<int> ([1, 2, 3, 4]);
-
+			stack = new StackStatic<int>([1, 2, 3, 4]);
 		}
 
 		[Test]
-		public void Push() 
+		public void Push()
 		{
-			DynamicStack<int> constructor1Test = new DynamicStack<int> ();
+			StackStatic<int> constructor1Test = new StackStatic<int>();
 			Assert.That(constructor1Test != null);
 			Assert.That(constructor1Test.Count == 0);
 
-			DynamicStack<int> constructor2Test = new DynamicStack<int>(1);
+			StackStatic<int> constructor2Test = new StackStatic<int>(1);
 			Assert.That(constructor2Test != null);
-			Assert.That(constructor2Test.Top != null);
-			Assert.That(constructor2Test.Top.Data == 1);
+			Assert.That(constructor2Test.Peek() == 1);
 			Assert.That(constructor2Test.Count == 1);
 
-			DynamicStack<int> constructor3Test = new DynamicStack<int>([1, 2, 3, 4]);
+			StackStatic<int> constructor3Test = new StackStatic<int>([1, 2, 3, 4]);
 			Assert.That(constructor3Test.Count == 4);
 
-			DynamicStack<int> pushTest = new DynamicStack<int>();
+			StackStatic<int> pushTest = new StackStatic<int>();
 			pushTest.Push(1);
-			Assert.That (pushTest.Count == 1);
-			Assert.That(pushTest.Top.Data == 1);
+			Assert.That(pushTest.Count == 1);
+			Assert.That(pushTest.Peek() == 1);
 
 			pushTest.Push(2);
 			Assert.That(pushTest.Count == 2);
-			Assert.That(pushTest.Top.Data == 2);
+			Assert.That(pushTest.Peek() == 2);
 
 
 		}

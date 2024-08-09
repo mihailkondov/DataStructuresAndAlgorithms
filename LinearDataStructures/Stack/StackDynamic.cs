@@ -1,18 +1,18 @@
 ﻿namespace LinearDataStructures.Stack
 {
-	public class DynamicStack<T> : IStack<T>
+	public class StackDynamic<T> : IStack<T>
 	{
-        public DynamicStack()
+        public StackDynamic()
         {
             Count = 0;
         }
 
-        public DynamicStack(T data)
+        public StackDynamic(T data)
         {
 			Push(data);
         }
 
-		public DynamicStack(T[] dataArray)
+		public StackDynamic(T[] dataArray)
 		{
 			for(int i = 0; i<dataArray.Length; i++)
 			{

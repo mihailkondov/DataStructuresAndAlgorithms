@@ -3,12 +3,12 @@ using LinearDataStructures.Stack;
 
 namespace LinearDataStructures.Demos
 {
-	internal class StackDemo : IRunable
+	internal class StackDemo : IDemoRunable
     {
         string expression = "12 - sqrt( 12 * (1 + 2) / 2 - (1 + 3))";
-        StaticStack<string> expressionsStack = new StaticStack<string>();
+        StackStatic<string> expressionsStack = new StackStatic<string>();
 
-        StaticStack<int> expressionStarts = new StaticStack<int>();
+        StackStatic<int> expressionStarts = new StackStatic<int>();
 
         public void Run()
         {

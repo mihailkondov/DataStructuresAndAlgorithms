@@ -1,6 +1,6 @@
 ﻿namespace LinearDataStructures.Demos
 {
-	internal interface IRunable
+	internal interface IDemoRunable
 	{
 		public void Run();
 	}

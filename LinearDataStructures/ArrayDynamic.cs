@@ -2,17 +2,17 @@
 
 namespace LinearDataStructures
 {
-	internal class DynamicArray
+	internal class ArrayDynamic
 	{
 		internal int capacity = 10;
 		internal int Count { get; private set; } = 0;
 		internal object[] array;
 
-        public DynamicArray()
+        public ArrayDynamic()
         {
 			this.array = new object[capacity];
         }
-        public DynamicArray(int capacity)
+        public ArrayDynamic(int capacity)
         {
             this.array = new object[capacity];
         }
@@ -112,7 +112,7 @@ namespace LinearDataStructures
 		public static void Demo()
 		{
 			Console.WriteLine("S T A R T I N G   Dynamic Array Demo:" + Environment.NewLine);
-			DynamicArray dynamicArray = new DynamicArray();
+			ArrayDynamic dynamicArray = new ArrayDynamic();
 			dynamicArray.Add("A");
 			dynamicArray.Add("B");
 			dynamicArray.Add("C");

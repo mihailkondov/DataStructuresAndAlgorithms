@@ -9,11 +9,11 @@ namespace LinearDataStructures
 			//DynamicArray.Demo();
 			//DoublyLinkedList<int>.Demo(new int[]{ 100, 20, 15, 1432 });
 
-			LinkedList<IRunable> list = new LinkedList<IRunable>();
-			IRunable stackDemo = new StackDemo();
+			ListLinked<IDemoRunable> list = new ListLinked<IDemoRunable>();
+			IDemoRunable stackDemo = new StackDemo();
 			list.Add(stackDemo);
 
-			foreach (IRunable item in list)
+			foreach (IDemoRunable item in list)
 			{
 				item.Run();
 			}

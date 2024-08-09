@@ -1,6 +1,6 @@
 ﻿namespace LinearDataStructures.LinkedList
 {
-	public interface IBasics<T>
+	public interface IListBasics<T>
     {
 		public void Add(T data);
         public void AddFirst(T data);

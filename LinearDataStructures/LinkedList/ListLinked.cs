@@ -4,16 +4,16 @@ using System.Collections;
 
 namespace LinearDataStructures
 {
-	public class LinkedList<T> : IBasics<T>, IEnumerable<T>
+	public class ListLinked<T> : IListBasics<T>, IEnumerable<T>
 	{
-		public LinkedList()
+		public ListLinked()
 		{
 			Head = null;
 		}
 
 		public int Count { get; private set; } = 0;
 
-		public LinkedListNode<T>? Head { get; private set; }
+		public ListLinkedNode<T>? Head { get; private set; }
 
 		//Indexer
 		public T this[int index]
@@ -23,7 +23,7 @@ namespace LinearDataStructures
 				if (index < 0) throw new IndexOutOfRangeException("Index cannot be negative");
 
 				int i = 0;
-				LinkedListNode<T> node = Head;
+				ListLinkedNode<T> node = Head;
 				while (i < Count)
 				{
 					if(i == index)
@@ -42,18 +42,18 @@ namespace LinearDataStructures
 		{
 			if (Head == null)
 			{
-				Head = new LinkedListNode<T>(data);
+				Head = new ListLinkedNode<T>(data);
 				this.Count++;
 			}
 			else
 			{
-				LinkedListNode<T> current = Head;
+				ListLinkedNode<T> current = Head;
 				while (current.Next != null)
 				{
 					current = current.Next;
 				}
 
-				current.Next = new LinkedListNode<T>(data);
+				current.Next = new ListLinkedNode<T>(data);
 				Count++;
 			}
 		}
@@ -62,8 +62,8 @@ namespace LinearDataStructures
 		{
 			if (Head is null) { return; } // List has no members => stop searching.
 
-			LinkedListNode<T> current = Head;
-			LinkedListNode<T>? next = Head.Next;
+			ListLinkedNode<T> current = Head;
+			ListLinkedNode<T>? next = Head.Next;
 			if (current.Data.Equals(data))
 			{
 				Head = Head.Next;
@@ -92,7 +92,7 @@ namespace LinearDataStructures
 		public void Print()
 		{
 			Console.WriteLine($"Printing list with {this.Count} members:");
-			LinkedListNode<T>? current;
+			ListLinkedNode<T>? current;
 			current = this.Head;
 			while (current != null)
 			{
@@ -104,9 +104,9 @@ namespace LinearDataStructures
 		public void Reverse()
 		{
 			Console.WriteLine("Reversing list...");
-			LinkedListNode<T>? current = this.Head;
-			LinkedListNode<T>? previous = null;
-			LinkedListNode<T>? savedNext;
+			ListLinkedNode<T>? current = this.Head;
+			ListLinkedNode<T>? previous = null;
+			ListLinkedNode<T>? savedNext;
 
 			while (current != null)
 			{
@@ -122,7 +122,7 @@ namespace LinearDataStructures
 		{
 			if (Head == null) return -1;
 
-			LinkedListNode<T> current = this.Head;
+			ListLinkedNode<T> current = this.Head;
 			int index = 0;
 			while (current != null)
 			{
@@ -153,20 +153,20 @@ namespace LinearDataStructures
 
 			if(this.Head == null)
 			{
-				this.Head = new LinkedListNode<T>(data);
+				this.Head = new ListLinkedNode<T>(data);
 				Count = 1;
 				return;
 			}
 
 			int currentIndex = 0;
-			LinkedListNode<T> currentNode = this.Head;
-			LinkedListNode<T> newNode;
+			ListLinkedNode<T> currentNode = this.Head;
+			ListLinkedNode<T> newNode;
 			while (currentIndex < index)
 			{
 				currentIndex++;
 				if(currentIndex == index)
 				{
-					newNode = new LinkedListNode<T>(data);
+					newNode = new ListLinkedNode<T>(data);
 					newNode.Next = currentNode.Next;
 					currentNode.Next = newNode;
 					Count++;
@@ -177,7 +177,7 @@ namespace LinearDataStructures
 			}
 
 			//Case Inserting at position 0
-			newNode = new LinkedListNode<T>(data);
+			newNode = new ListLinkedNode<T>(data);
 			newNode.Next = Head;
 			Head = newNode;
 			Count++;
@@ -203,7 +203,7 @@ namespace LinearDataStructures
 		//IEnumerable implementation
 		public IEnumerator<T> GetEnumerator()
 		{
-			LinkedListNode<T> current = this.Head;
+			ListLinkedNode<T> current = this.Head;
 			while (current != null)
 			{
 				yield return current.Data;
@@ -218,7 +218,7 @@ namespace LinearDataStructures
 
 		public static void Demo()
 		{
-			LinkedList<int> list = new LinkedList<int>();
+			ListLinked<int> list = new ListLinked<int>();
 			list.Add(100);
 			list.Add(200);
 			list.Add(300);

@@ -2,25 +2,25 @@
 
 namespace Tests
 {
-	internal class DynamicQueueTest
+	internal class TestQueueDynamic
 	{
-		DynamicQueue<int> queue;
-		DynamicQueue<int> queueOne;
+		QueueDynamic<int> queue;
+		QueueDynamic<int> queueOne;
 		[SetUp]
 		public void SetUp() 
 		{
-			queue = new DynamicQueue<int>();
-			queueOne = new DynamicQueue<int>(100);
+			queue = new QueueDynamic<int>();
+			queueOne = new QueueDynamic<int>(100);
 		}
 
 		[Test]
 		public void Constructors()
 		{
-			DynamicQueue<int> queue1 = new DynamicQueue<int>();
+			QueueDynamic<int> queue1 = new QueueDynamic<int>();
 			Assert.That(queue1 != null);
 			Assert.That(queue1.Count == 0);
 
-			DynamicQueue<int> queue2 = new DynamicQueue<int>(1);
+			QueueDynamic<int> queue2 = new QueueDynamic<int>(1);
 			Assert.That(queue2 != null);
 			Assert.That(queue2.Count == 1);
 		}

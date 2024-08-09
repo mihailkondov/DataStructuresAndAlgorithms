@@ -2,19 +2,19 @@ using LinearDataStructures.LinkedList;
 
 namespace Tests
 {
-    public class DoublyLinkedListTest
+    public class TestListDoublyLinked
 	{
-		DoublyLinkedList<int> listInt;
-		DoublyLinkedList<object> listObj;
-		DoublyLinkedList<int> populatedList;
+		ListDoublyLinked<int> listInt;
+		ListDoublyLinked<object> listObj;
+		ListDoublyLinked<int> populatedList;
 		static List<int> numbers = [0, 100, 200, 300, 400];
 
 		[SetUp]
 		public void Setup()
 		{
-			listInt = new DoublyLinkedList<int>();
-			listObj = new DoublyLinkedList<object>();
-			populatedList = new DoublyLinkedList<int>();
+			listInt = new ListDoublyLinked<int>();
+			listObj = new ListDoublyLinked<object>();
+			populatedList = new ListDoublyLinked<int>();
 			populatedList.Add(numbers[0]);
 			populatedList.Add(numbers[1]);
 			populatedList.Add(numbers[2]);

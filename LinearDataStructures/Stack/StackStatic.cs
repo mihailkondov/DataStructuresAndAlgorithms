@@ -4,24 +4,24 @@
 	/// Stack implementation using a dynamic array to hold the data
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class StaticStack<T> : IStack<T>
+	public class StackStatic<T> : IStack<T>
 	{
 		private static readonly int _initialCapacity = 2;
 		private int _capacity = _initialCapacity;
 		private T[] _dataArray = new T[_initialCapacity];
 		private int _top = -1;
 
-		public StaticStack()
+		public StackStatic()
 		{
 
 		}
 
-		public StaticStack(T data)
+		public StackStatic(T data)
 		{
 			Push(data);
 		}
 
-		public StaticStack(ICollection<T> data)
+		public StackStatic(ICollection<T> data)
 		{
 			foreach (var item in data) 
 			{
