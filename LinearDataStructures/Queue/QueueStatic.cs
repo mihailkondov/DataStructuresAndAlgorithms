@@ -5,13 +5,14 @@
 		static int _initialCapacity = 2;
 		private T[] _dataArray = new T[_initialCapacity];
 		private int _head = 0;
-		private int _tail = 0;
+		private int _tail = -1;
 		private int _capacity = _initialCapacity;
 
 		public int Count { get; private set; } = 0;
 
 		private void Grow()
 		{
+			;
 			if(Count == 0)
 			{
 				_capacity = _initialCapacity;
@@ -40,7 +41,7 @@
 
 			_dataArray = newArray; 
 			_head = 0;
-			_tail = _head + _dataArray.Length - 1;
+			_tail = cursorNA - 1;
 		}
 
 		private void Shrink()
@@ -52,9 +53,11 @@
 
 			int cursorNA = 0;
 			int cursorOA = _head;
-			while (cursorOA < oldCapacity)
+			while (cursorOA < oldCapacity && cursorNA < Count)
 			{
-				newArray[cursorNA++] = oldArray[cursorOA++];
+				newArray[cursorNA] = oldArray[cursorOA];
+				cursorNA++;
+				cursorOA++;
 			}
 
 			int countMinusOne = Count - 1;
@@ -67,7 +70,7 @@
 
 			_dataArray = newArray;
 			_head = 0;
-			_tail = _head + _dataArray.Length - 1;
+			_tail = cursorNA - 1;
 		}
 
         public T Dequeue()
@@ -97,11 +100,16 @@
 				Grow();
 			}
 
-			_dataArray[_tail++] = data;
-			if (_tail == _capacity)
+			if (_tail + 1 == _capacity)
 			{
 				_tail = 0;
 			}
+			else
+			{
+				_tail++;
+			}
+
+			_dataArray[_tail] = data;
 
 			Count++;
 		}
