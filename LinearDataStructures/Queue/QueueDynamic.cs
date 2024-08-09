@@ -79,5 +79,24 @@ namespace LinearDataStructures.Queue
 			return result;
 		}
 
+		public void Clear()
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool Contains(T data)
+		{
+			throw new NotImplementedException();
+		}
+
+		public T[] ToArray()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void TrimExcess()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

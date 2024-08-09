@@ -1,9 +1,13 @@
 ﻿using LinearDataStructures.Queue;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Tests
 {
@@ -12,13 +16,13 @@ namespace Tests
 		string[] strings;
 		int[] ints;
 		QueueStatic<int> queueInt;
-		QueueStatic<string> queueString;
+		QueueStatic<string> queueStr;
 
 		[SetUp]
 		public void SetUp()
 		{
 			queueInt = new QueueStatic<int>();
-			queueString = new QueueStatic<string>();
+			queueStr = new QueueStatic<string>();
 			ints = new int[] { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 };
 			strings = new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen" };
 		}
@@ -39,10 +43,10 @@ namespace Tests
 		{
 			foreach (var item in strings)
 			{
-				queueString.Enqueue(item);
+				queueStr.Enqueue(item);
 			}
 
-			Assert.That(queueString.Count == strings.Length);
+			Assert.That(queueStr.Count == strings.Length);
 		}
 
 		[Test]
@@ -65,17 +69,17 @@ namespace Tests
 			string str = "test";
 
 			Assert.Throws<InvalidOperationException>(
-				() => { var a = queueString.Peek(); },
+				() => { var a = queueStr.Peek(); },
 				"Queue is empty. Can only peek in a queue with 1 or more members");
 
-			queueString.Enqueue(str);
-			string result = queueString.Peek();
+			queueStr.Enqueue(str);
+			string result = queueStr.Peek();
 			Assert.That(result.Equals(str));
-			Assert.That(queueString.Count == 1);
+			Assert.That(queueStr.Count == 1);
 
-			queueString.Enqueue("secondInLine");
-			Assert.That(queueString.Peek() == str);
-			Assert.That(queueString.Count == 2);
+			queueStr.Enqueue("secondInLine");
+			Assert.That(queueStr.Peek() == str);
+			Assert.That(queueStr.Count == 2);
 
 		}
 
@@ -111,19 +115,148 @@ namespace Tests
 
 			foreach (var item in strings)
 			{
-				queueString.Enqueue(item);
+				queueStr.Enqueue(item);
 			}
 
 			// Act
 			for (int i = 0; i < resultArray.Length; i++)
 			{
-				resultArray[i] = queueString.Dequeue();
+				resultArray[i] = queueStr.Dequeue();
 			}
 
 			// Assert
 			Assert.That(EqualsCompareStringArraysByValue(resultArray, strings));
-			Assert.That(queueString.Count == 0);
-			Assert.Throws<InvalidOperationException>(() => queueString.Dequeue(), "Cannot dequeue from an empty queue.");
+			Assert.That(queueStr.Count == 0);
+			Assert.Throws<InvalidOperationException>(() => queueStr.Dequeue(), "Cannot dequeue from an empty queue.");
+		}
+
+		[Test]
+		public void Clear()
+		{
+
+			foreach (var item in ints)
+			{
+				queueInt.Enqueue(item);
+			}
+
+			foreach (var item in strings)
+			{
+				queueStr.Enqueue(item);
+			}
+
+			queueInt.Clear();
+			queueStr.Clear();
+			Assert.That(queueInt.Count, Is.EqualTo(0));
+			Assert.That(queueStr.Count, Is.EqualTo(0));
+
+		}
+
+		[Test]
+		public void ClearEmpty() 
+		{
+			queueInt.Clear();
+			queueStr.Clear();
+			Assert.That(queueInt.Count, Is.EqualTo(0));
+			Assert.That(queueStr.Count, Is.EqualTo(0));
+		}
+
+		[TestCase(100)]
+		[TestCase(200)]
+		[TestCase(300)]
+		[TestCase(400)]
+		[TestCase(500)]
+		[TestCase(600)]
+		[TestCase(1600)]
+		public void ContainsFoundInt(int a)
+		{
+			foreach(var item in ints)
+			{
+				queueInt.Enqueue(item);
+			}
+			Assert.That(queueInt.Contains(a) == true);
+		}
+
+		[Test]
+		public void ContainsNotFoundInt()
+		{
+			Assert.That(queueInt.Contains(53478) == false);
+
+			foreach (var item in ints)
+			{
+				queueInt.Enqueue(item);
+			}
+
+			Assert.That(queueInt.Contains(53478) == false);
+
+		}
+
+		[TestCase("one")]
+		[TestCase("two")]
+		[TestCase( "three")]
+		[TestCase("seven")]
+		[TestCase("eight")]
+		[TestCase("fourteen")]
+		[TestCase("sixteen")]
+		public void ContainsFoundStr(string a)
+		{
+			foreach (var item in strings)
+			{
+				queueStr.Enqueue(item);
+			}
+			Assert.That(queueStr.Contains(a) == true);
+		}
+
+		[Test]
+		public void ContainsNotFoundStr()
+		{
+			Assert.That(queueStr.Contains("53478") == false);
+
+			foreach (var item in strings)
+			{
+				queueStr.Enqueue(item);
+			}
+
+			Assert.That(queueStr.Contains("53478") == false);
+		}
+
+		[Test]
+		public void ToArrayInt()
+		{
+			foreach (var item in ints)
+			{
+				queueInt.Enqueue(item);
+			}
+
+			Assert.That(queueInt.ToArray().SequenceEqual(ints));
+		}
+
+		[Test]
+		public void ToArrayString()
+		{
+			foreach (var item in strings)
+			{
+				queueStr.Enqueue(item);
+			}
+
+			Assert.That(EqualsCompareStringArraysByValue(strings, queueStr.ToArray()));
+		}
+
+		[Test]
+		public void TrimExcess()
+		{
+			int elementsToMove = 12;
+			for(int i = 0; i < elementsToMove; i++)
+			{
+				queueStr.Enqueue(strings[i]);
+			}
+
+			
+			queueStr.TrimExcess();
+
+			Assert.That(queueStr.Count == elementsToMove);
+			Assert.DoesNotThrow(() => queueStr.TrimExcess());
+
+
 		}
 
 		[Test]

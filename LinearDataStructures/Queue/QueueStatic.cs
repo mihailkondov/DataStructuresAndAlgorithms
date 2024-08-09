@@ -121,5 +121,60 @@
 
 			return _dataArray[_head];
 		}
+
+		public void Clear()
+		{
+			Count = 0;
+			_capacity = _initialCapacity;
+			_head = 0;
+			_tail = 0;
+			_dataArray = new T[_initialCapacity];
+		}
+
+		public bool Contains(T data)
+		{
+			if (Count == 0)
+			{
+				return false;
+			}
+
+			foreach(T item in _dataArray)
+			{
+				if (item.Equals(data))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public T[] ToArray()
+		{
+			T[] array = new T[Count];
+			int cursor = _head;
+			int copies = 0;
+			while(cursor < _capacity && copies < Count)
+			{
+				array[copies++] = _dataArray[cursor++];
+			}
+
+			cursor = 0;
+
+			while(copies < Count)
+			{
+				array[copies++] = _dataArray[cursor];
+			}
+
+			return array;
+		}
+
+		public void TrimExcess()
+		{
+			_dataArray = this.ToArray();
+			_capacity = _dataArray.Length;
+			_head = 0;
+			_tail = _capacity - 1;
+		}
 	}
 }
