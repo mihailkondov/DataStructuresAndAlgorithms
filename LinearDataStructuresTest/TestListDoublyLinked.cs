@@ -1,4 +1,4 @@
-using LinearDataStructures.LinkedList;
+using LinearDataStructures.Lists.LinkedList;
 
 namespace Tests
 {

@@ -1,8 +1,8 @@
-﻿namespace LinearDataStructures.LinkedList
+﻿namespace LinearDataStructures.Lists.LinkedList
 {
-	public interface IListBasics<T>
+    public interface IListBasics<T>
     {
-		public void Add(T data);
+        public void Add(T data);
         public void AddFirst(T data);
         public void AddLast(T data);
         public void AddBefore(T find, T data);

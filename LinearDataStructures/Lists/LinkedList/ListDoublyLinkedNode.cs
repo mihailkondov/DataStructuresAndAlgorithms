@@ -1,6 +1,6 @@
-﻿namespace LinearDataStructures.LinkedList
+﻿namespace LinearDataStructures.Lists.LinkedList
 {
-	public class ListDoublyLinkedNode<T>
+    public class ListDoublyLinkedNode<T>
     {
         public T? Data { get; set; }
         public ListDoublyLinkedNode<T>? Next { get; set; } = null;
@@ -18,9 +18,9 @@
             Next = next;
         }
 
-		public override string ToString()
-		{
+        public override string ToString()
+        {
             return $"{Data}";
-		}
-	}
+        }
+    }
 }

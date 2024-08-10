@@ -1,8 +1,8 @@
 ﻿using System.Text;
 
-namespace LinearDataStructures.LinkedList
+namespace LinearDataStructures.Lists.LinkedList
 {
-	public class ListDoublyLinked<T> : IListBasics<T>
+    public class ListDoublyLinked<T> : IListBasics<T>
     {
         public ListDoublyLinkedNode<T>? Head;
         public ListDoublyLinkedNode<T>? Tail;
@@ -18,16 +18,16 @@ namespace LinearDataStructures.LinkedList
         {
             get
             {
-                if(index < 0)
+                if (index < 0)
                 {
                     throw new IndexOutOfRangeException("Invalid index (index must be a positive integer or zero)");
                 }
 
                 int i = 0;
-                ListDoublyLinkedNode<T> current = this.Head;
-                while(current != null)
+                ListDoublyLinkedNode<T> current = Head;
+                while (current != null)
                 {
-                    if(i == index)
+                    if (i == index)
                     {
                         return current.Data;
                     }
@@ -200,41 +200,41 @@ namespace LinearDataStructures.LinkedList
             if (index < 0)
                 throw new IndexOutOfRangeException("Index cannot be negative");
 
-            if (index >= Count) 
+            if (index >= Count)
                 throw new IndexOutOfRangeException("Position doesn't exist on the list");
 
             int i = 0;
             ListDoublyLinkedNode<T> current = Head;
 
-            while(current != null)
+            while (current != null)
             {
                 if (i == index)
                 {
-                    if(current.Previous == null) // Case deleting first member
+                    if (current.Previous == null) // Case deleting first member
                     {
                         Head = current.Next;
 
-                        if(Head == null) // List had only 1 member
+                        if (Head == null) // List had only 1 member
                         {
                             Tail = Head;
-						}
-						else //List had more than 1 members
+                        }
+                        else //List had more than 1 members
                         {
-							Head.Previous = null;
-						}
+                            Head.Previous = null;
+                        }
                     }
                     else // Deleting middle / last member:
                     {
-						current.Previous.Next = current.Next;
-                        if(current.Next != null) // Case not deleting last member:
+                        current.Previous.Next = current.Next;
+                        if (current.Next != null) // Case not deleting last member:
                         {
-                            current.Next.Previous = current.Previous; 
+                            current.Next.Previous = current.Previous;
                         }
                         else // Deleting last member
                         {
                             Tail = current.Previous;
                         }
-					}
+                    }
 
                     Count--;
                 }
@@ -244,24 +244,24 @@ namespace LinearDataStructures.LinkedList
             }
         }
 
-		public void AddFirst(T data)
+        public void AddFirst(T data)
         {
             Insert(0, data);
         }
         public void AddLast(T data)
-        { 
+        {
             Insert(Count, data);
         }
-		public void AddBefore(T find, T data)
+        public void AddBefore(T find, T data)
         {
             Insert(Search(find), data);
         }
-		public void AddAfter(T find, T data)
+        public void AddAfter(T find, T data)
         {
-			Insert(Search(find) + 1, data);
-		}
+            Insert(Search(find) + 1, data);
+        }
 
-		public override string ToString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder("[");
             StringBuilder previous = new StringBuilder("[");

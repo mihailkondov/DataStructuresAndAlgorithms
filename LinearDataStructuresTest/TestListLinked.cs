@@ -1,20 +1,22 @@
-﻿namespace Tests
+﻿using LinearDataStructures.Lists.LinkedList;
+
+namespace Tests
 {
-	internal class TestListLinked
+    internal class TestListLinked
 	{
-		LinearDataStructures.ListLinked<int> listInt;
-		LinearDataStructures.ListLinked<int> listEmpty;
+        ListLinked<int> listInt;
+        ListLinked<int> listEmpty;
 		int[] integers =  [ 1, 2, 3, 4, 5, 6, 7, 8 ];
 		[SetUp]
 		public void Setup()
 		{
-			listInt = new LinearDataStructures.ListLinked<int>();
+			listInt = new ListLinked<int>();
 			for(int i = 0; i < integers.Length; i++)
 			{
 				listInt.Add(integers[i]);
 			}
 
-			listEmpty = new LinearDataStructures.ListLinked<int>();
+			listEmpty = new ListLinked<int>();
 		}
 
 		[Test]
@@ -27,8 +29,8 @@
 		[Test]
 		public void Add()
 		{
-			LinearDataStructures.ListLinked<int> list = new LinearDataStructures.ListLinked<int>();
-			LinearDataStructures.ListLinked<string> listS = new LinearDataStructures.ListLinked<string>();
+            ListLinked<int> list = new ListLinked<int>();
+            ListLinked<string> listS = new ListLinked<string>();
 			list.Add(1);
 			Assert.DoesNotThrow(() => list.Add(1));
 			Assert.That(list.Head.Data == 1);
@@ -74,7 +76,7 @@
 
 			int[] placeholder = new int[integers.Length];
 			int index = 0;
-			LinearDataStructures.ListLinkedNode<int> current = listInt.Head;
+			ListLinkedNode<int> current = listInt.Head;
 			while(current != null)
 			{
 				placeholder[index] = current.Data;
