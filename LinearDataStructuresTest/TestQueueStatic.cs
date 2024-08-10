@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace Tests
 {
-	public class TestQueueStatic
+	public class TestQueueStatic : TestQueueCommonMethods
 	{
 		string[] strings;
 		int[] ints;
@@ -250,12 +250,11 @@ namespace Tests
 				queueStr.Enqueue(strings[i]);
 			}
 
-			
 			queueStr.TrimExcess();
 
 			Assert.That(queueStr.Count == elementsToMove);
 			Assert.DoesNotThrow(() => queueStr.TrimExcess());
-
+			Assert.That(queueStr.Capacity == elementsToMove);
 
 		}
 
@@ -280,30 +279,6 @@ namespace Tests
 
 			Assert.That(result.SequenceEqual(ints));
 
-		}
-
-		/// <summary>
-		/// Compares two arrays of strings character by character for each string. 
-		/// </summary>
-		/// <param name="a">string array to compare</param>
-		/// <param name="b">string array to compare</param>
-		/// <returns></returns>
-		private bool EqualsCompareStringArraysByValue(string[] a, string[] b)
-		{
-			if (a.Length != b.Length)
-			{
-				return false;
-			}
-
-			for (int i = 0; i < a.Length; i++)
-			{
-				if (string.Compare(a[i], b[i]) != 0)
-				{
-					return false;
-				}
-			}
-
-			return true;
 		}
 	}
 }

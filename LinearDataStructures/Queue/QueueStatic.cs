@@ -9,6 +9,7 @@
 		private int _capacity = _initialCapacity;
 
 		public int Count { get; private set; } = 0;
+		public int Capacity { get => _capacity; }
 
 		private void Grow()
 		{
