@@ -13,19 +13,6 @@ namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
 			: base(data) { }
 
 		public bool IsReadOnly => throw new NotImplementedException();
-        
-		//public IEnumerator<T> GetEnumerator()
-        //{
-        //	for (int i = 0; i < this._capacity; i++)
-        //	{
-        //		yield return _array[i];
-        //	}
-        //}
-
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //	return this.GetEnumerator();
-        //}
 
         protected void Grow()
 		{
