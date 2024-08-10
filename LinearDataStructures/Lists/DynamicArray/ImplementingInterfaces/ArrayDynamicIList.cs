@@ -11,8 +11,29 @@ namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
 	{
 		public T this[int index]
 		{
-			get => throw new NotImplementedException();
-			set => throw new NotImplementedException();
+			get 
+			{
+				if(index < 0 || index >= Count)
+				{
+					throw new IndexOutOfRangeException();
+				}
+				else
+				{
+					return _array[index];
+				}
+			}
+
+			set
+			{
+				if (index < 0 || index >= Count)
+				{
+					throw new IndexOutOfRangeException();
+				}
+				else
+				{
+					_array[index] = value;
+				}
+			}
 		}
 
 		public int IndexOf(T item)
