@@ -1,9 +1,9 @@
-﻿using LinearDataStructures.LinkedList;
+﻿using LinearDataStructures.Lists.LinkedList;
 using System.ComponentModel;
 
 namespace LinearDataStructures.Queue
 {
-	public class QueueDynamic<T> : IQueue<T>
+    public class QueueDynamic<T> : IQueue<T>
 	{
 		private ListDoublyLinked<T> list;
 		private ListDoublyLinkedNode<T>? Oldest;
