@@ -72,7 +72,7 @@ namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
 		{
 			if (index > Count || index < 0)
 			{
-				throw new ArgumentOutOfRangeException();
+				throw new IndexOutOfRangeException();
 			}
 			if (Count == _capacity)
 			{

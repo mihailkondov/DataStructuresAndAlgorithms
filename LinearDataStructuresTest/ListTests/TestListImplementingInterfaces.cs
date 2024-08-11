@@ -253,6 +253,7 @@ namespace Tests.ListTests
 			Assert.Throws<IndexOutOfRangeException>(() => { int a = listInt[-1]; });
 		}
 
+		[Test]
 		public void IndexerSetValue()
 		{
 			int newValue = 10000;
@@ -268,6 +269,7 @@ namespace Tests.ListTests
 			Assert.Throws<IndexOutOfRangeException>(() => { listInt[-1] = newValue; });
 		}
 
+		[Test]
 		public void Insert()
 		{
 			int newValue = 10000;
@@ -277,13 +279,14 @@ namespace Tests.ListTests
 
 			SetUp();
 			listInt.Insert(listInt.Count, newValue);
-			Assert.That(listInt[listInt.Count], Is.EqualTo(newValue));
+			Assert.That(listInt[listInt.Count - 1], Is.EqualTo(newValue));
 			Assert.That(listInt.Count, Is.EqualTo(INTS.Length + 1));
 
 			Assert.Throws<IndexOutOfRangeException>(() => { listInt.Insert(-1, newValue); });
 			Assert.Throws<IndexOutOfRangeException>(() => { listInt.Insert(listInt.Count + 1, newValue); });
 		}
 
+		[Test]
 		public void RemoveAt()
 		{
 			listInt.RemoveAt(0);
@@ -293,10 +296,10 @@ namespace Tests.ListTests
 			SetUp();
 			listInt.RemoveAt(listInt.Count - 1);
 			Assert.That(listInt, Is.Not.Null);
-			Assert.That(listInt[listInt.Count - 1], Is.EqualTo(INTS[INTS.Length - 1]));
+			Assert.That(listInt[listInt.Count - 1], Is.EqualTo(INTS[INTS.Length - 2]));
 
-			Assert.Throws<IndexOutOfRangeException>(() =>  listInt.RemoveAt(-1));
-			Assert.Throws<IndexOutOfRangeException>(() =>  listInt.RemoveAt(listInt.Count));
+			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(-1));
+			Assert.Throws<IndexOutOfRangeException>(() => listInt.RemoveAt(listInt.Count));
 		}
 		#endregion
 	}
