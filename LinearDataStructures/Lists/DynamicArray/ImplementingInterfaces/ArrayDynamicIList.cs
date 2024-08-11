@@ -7,9 +7,15 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
 {
-	internal class ArrayDynamicIList<T> : ArrayDynamicICollection<T>, IList<T>
+	public class ArrayDynamicIList<T> : ArrayDynamicICollection<T>, IList<T>
 	{
-		public T this[int index]
+        public ArrayDynamicIList() 
+			: base() { }
+
+        public ArrayDynamicIList(T[] data) 
+			: base(data) { }
+
+        public T this[int index]
 		{
 			get 
 			{

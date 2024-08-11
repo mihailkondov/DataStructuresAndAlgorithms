@@ -18,16 +18,21 @@ namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
         }
         public ArrayDynamicIEnumerable(T[] dataArray)
         {
-            _array = dataArray;
+			_array = new T[dataArray.Length];
+			for(int i = 0; i < dataArray.Length; i++)
+			{
+				_array[i] = dataArray[i];
+			}
 			_capacity = dataArray.Length;
 			Count = _capacity;
         }
 
 		public IEnumerator<T> GetEnumerator()
 		{
-			for(int i = 0; i < this._capacity; i++)
+			int i = 0;
+			while(i < Count)
 			{
-				yield return _array[i];
+				yield return _array[i++];
 			}
 		}
 
