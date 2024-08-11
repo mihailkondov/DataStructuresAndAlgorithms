@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace Tests.ListTests
 {
+	[TestFixture]
 	internal class TestListImplementingInterfaces
 	{
 		ArrayDynamicIEnumerable<int> enumerableInt;
@@ -85,6 +86,7 @@ namespace Tests.ListTests
 		#endregion
 
 		#region IEnumerable tests
+
 		[Test]
 		public void IEnumerable()
 		{
@@ -112,6 +114,7 @@ namespace Tests.ListTests
 		#endregion
 
 		#region ICollection tests
+
 		[Test]
 		public void ReadOnlyIsFalse()
 		{
@@ -228,7 +231,7 @@ namespace Tests.ListTests
 		[Test]
 		public void Remove()
 		{
-			for(int i = 0; i < INTS.Length; i++) 
+			for (int i = 0; i < INTS.Length; i++)
 			{
 				collectionInt.Remove(INTS[i]);
 			}
@@ -236,6 +239,64 @@ namespace Tests.ListTests
 			Assert.That(collectionInt.Count, Is.EqualTo(0));
 			Assert.That(collectionInt.Contains(INTS[1]) == false);
 			Assert.That(collectionInt.Remove(123333) == false);
+		}
+		#endregion
+
+		#region IList tests
+
+		[Test]
+		public void IndexerGetValue()
+		{
+			Assert.That(listInt[0] == INTS[0]);
+			Assert.That(listInt[INTS.Length - 1] == INTS[INTS.Length - 1]);
+			Assert.Throws<IndexOutOfRangeException>(() => { int a = listInt[INTS.Length]; });
+			Assert.Throws<IndexOutOfRangeException>(() => { int a = listInt[-1]; });
+		}
+
+		public void IndexerSetValue()
+		{
+			int newValue = 10000;
+			int newEndValue = 10001;
+			listInt[0] = newValue;
+			Assert.That(listInt[0] == newValue);
+
+			listInt[listInt.Count] = newEndValue;
+			Assert.That(listInt[listInt.Count - 1] == newEndValue);
+			Assert.That(listInt.Count == INTS.Length + 1);
+
+			Assert.Throws<IndexOutOfRangeException>(() => { listInt[listInt.Count + 1] = newValue; });
+			Assert.Throws<IndexOutOfRangeException>(() => { listInt[-1] = newValue; });
+		}
+
+		public void Insert()
+		{
+			int newValue = 10000;
+			listInt.Insert(0, newValue);
+			Assert.That(listInt[0], Is.EqualTo(newValue));
+			Assert.That(listInt.Count, Is.EqualTo(INTS.Length + 1));
+
+			SetUp();
+			listInt.Insert(listInt.Count, newValue);
+			Assert.That(listInt[listInt.Count], Is.EqualTo(newValue));
+			Assert.That(listInt.Count, Is.EqualTo(INTS.Length + 1));
+
+			Assert.Throws<IndexOutOfRangeException>(() => { listInt.Insert(-1, newValue); });
+			Assert.Throws<IndexOutOfRangeException>(() => { listInt.Insert(listInt.Count + 1, newValue); });
+		}
+
+		public void RemoveAt()
+		{
+			listInt.RemoveAt(0);
+			Assert.That(listInt, Is.Not.Null);
+			Assert.That(listInt[0], Is.EqualTo(INTS[1]));
+
+			SetUp();
+			listInt.RemoveAt(listInt.Count - 1);
+			Assert.That(listInt, Is.Not.Null);
+			Assert.That(listInt[listInt.Count - 1], Is.EqualTo(INTS[INTS.Length - 1]));
+
+			Assert.Throws<IndexOutOfRangeException>(() =>  listInt.RemoveAt(-1));
+			Assert.Throws<IndexOutOfRangeException>(() =>  listInt.RemoveAt(listInt.Count));
 		}
 		#endregion
 	}

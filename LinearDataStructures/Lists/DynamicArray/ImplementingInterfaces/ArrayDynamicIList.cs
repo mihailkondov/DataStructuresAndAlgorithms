@@ -9,17 +9,17 @@ namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
 {
 	public class ArrayDynamicIList<T> : ArrayDynamicICollection<T>, IList<T>
 	{
-        public ArrayDynamicIList() 
+		public ArrayDynamicIList()
 			: base() { }
 
-        public ArrayDynamicIList(T[] data) 
+		public ArrayDynamicIList(T[] data)
 			: base(data) { }
 
-        public T this[int index]
+		public T this[int index]
 		{
-			get 
+			get
 			{
-				if(index < 0 || index >= Count)
+				if (index < 0 || index >= Count)
 				{
 					throw new IndexOutOfRangeException();
 				}
@@ -33,7 +33,20 @@ namespace LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces
 			{
 				if (index < 0 || index >= Count)
 				{
-					throw new IndexOutOfRangeException();
+					if (index == Count)
+					{
+						if(_capacity == Count)
+						{
+							Grow();
+						}
+
+						_array[index] = value;
+						Count++;
+					}
+					else
+					{
+						throw new IndexOutOfRangeException();
+					}
 				}
 				else
 				{
