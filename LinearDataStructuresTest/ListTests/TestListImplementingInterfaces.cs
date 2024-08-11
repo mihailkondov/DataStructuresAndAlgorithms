@@ -270,6 +270,22 @@ namespace Tests.ListTests
 		}
 
 		[Test]
+		public void IndexOf()
+		{
+			int[] indices = new int[INTS.Length];
+			int[] expectedIndices = new int[INTS.Length];
+			for (int i = 0; i<INTS.Length; i++)
+			{
+				indices[i] = listInt.IndexOf(INTS[i]);
+				expectedIndices[i] = i;
+			}
+
+			Assert.That(indices, Is.EqualTo(expectedIndices)); //Case found
+			Assert.That(listInt.IndexOf(12345), Is.EqualTo(-1)); //Case not found
+
+		}
+
+		[Test]
 		public void Insert()
 		{
 			int newValue = 10000;
