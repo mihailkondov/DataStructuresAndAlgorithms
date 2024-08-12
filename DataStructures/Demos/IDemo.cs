@@ -1,6 +1,6 @@
 ﻿namespace DataStructures.Demos
 {
-	internal interface IDemoRunable
+	internal interface IDemo
 	{
 		public void Run();
 	}

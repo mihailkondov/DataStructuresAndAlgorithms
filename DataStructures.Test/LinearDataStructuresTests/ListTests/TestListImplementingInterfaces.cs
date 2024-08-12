@@ -1,10 +1,10 @@
 ﻿using static DataStructures.Tests.LinearDataStructuresTests.LinearDataStructuresConstants;
-using static DataStructures.ErrorMessages;
+using static DataStructures.LinearDataStructures.LinearDataStructuresErrorMessages;
 using DataStructures.LinearDataStructures.Lists.DynamicArray.ImplementingInterfaces;
 
 namespace DataStructures.Tests.LinearDataStructuresTests.ListTests
 {
-	[TestFixture]
+    [TestFixture]
     internal class TestListImplementingInterfaces
     {
         ArrayDynamicIEnumerable<int> enumerableInt;

@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using DataStructures.LinearDataStructures.Stack;
 
-namespace DataStructures.Demos
+namespace DataStructures.Demos.StackDemos
 {
-    internal class StackDemo : IDemoRunable
+    internal class StackDemo : IDemo
     {
         string expression = "12 - sqrt( 12 * (1 + 2) / 2 - (1 + 3))";
         StackStatic<string> expressionsStack = new StackStatic<string>();
@@ -23,9 +23,9 @@ namespace DataStructures.Demos
                 }
                 else if (expression[i] == ')')
                 {
-					StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new StringBuilder();
 
-					for (int j = expressionStarts.Pop(); j <= i; j++)
+                    for (int j = expressionStarts.Pop(); j <= i; j++)
                     {
                         sb.Append(expression[j]);
                     }
