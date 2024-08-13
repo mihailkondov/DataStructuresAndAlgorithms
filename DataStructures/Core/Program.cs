@@ -1,5 +1,6 @@
 ﻿using DataStructures.Demos;
 using DataStructures.Demos.StackDemos;
+using DataStructures.Demos.TreeDemos;
 using DataStructures.LinearDataStructures.Lists.LinkedList;
 
 namespace DataStructures.Core
@@ -12,8 +13,12 @@ namespace DataStructures.Core
             //DoublyLinkedList<int>.Demo(new int[]{ 100, 20, 15, 1432 });
 
             ListLinked<IDemo> list = new ListLinked<IDemo>();
+            
             IDemo stackDemo = new StackDemo();
-            list.Add(stackDemo);
+            IDemo treeDemo = new TreeDemo();
+            
+            // list.Add(stackDemo);
+            list.Add(treeDemo);
 
             foreach (IDemo item in list)
             {
