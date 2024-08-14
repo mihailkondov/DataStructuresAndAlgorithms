@@ -12,7 +12,7 @@ namespace DataStructures.Trees
 		private T _value;
 		private List<BasicTreeNode<T>> _children;
 
-		public BasicTreeNode(T data) 
+		public BasicTreeNode(T data)
 		{
 			_value = data;
 			_children = new List<BasicTreeNode<T>>();
@@ -28,20 +28,30 @@ namespace DataStructures.Trees
 			return _children[index];
 		}
 
-        public List<BasicTreeNode<T>> Children { get => _children; set => _children = value; }
-        public T Value { get => _value; set => _value = value; }
+		public List<BasicTreeNode<T>> Children { get => _children; set => _children = value; }
+		public T Value { get => _value; set => _value = value; }
+		public BasicTree<T> GetTree
+		{
+			get
+			{
+				BasicTree<T> tree = new BasicTree<T>(Value);
+				tree.Root = this;
+				return tree;
+			}
+		}
 
-        public int Count { get => _children.Count; }
+
+		public int Count { get => _children.Count; }
 
 		public void Print(string indent = "")
 		{
 			indent += "  ";
-            Console.WriteLine(indent + Value);
-			foreach(var child in  Children)
+			Console.WriteLine(indent + Value);
+			foreach (var child in Children)
 			{
 				child.Print(indent);
 			}
-        }
+		}
 
-    }
+	}
 }

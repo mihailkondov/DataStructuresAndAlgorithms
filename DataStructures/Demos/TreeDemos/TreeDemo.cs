@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,17 @@ namespace DataStructures.Demos.TreeDemos
 			);
 
 			tree.Print();
-		}
+			Console.WriteLine("Custom DFS function -> Pre order");
+			tree.ApplyVoidFunctionDepthFirstPreOrder(Console.WriteLine);
+
+			Console.WriteLine("Custom DFS function -> Post order");
+			tree.ApplyVoidFunctionDepthFirstPostOrder(Console.WriteLine);
+
+			Console.WriteLine("Custom DFS function -> In order");
+			tree.ApplyVoidFunctionDepthFirstInOrder(Console.WriteLine);
+
+            Console.WriteLine("Print members bredth first:");
+			tree.ApplyVoidFunctionBreadthFirst(Console.WriteLine);
+        }
 	}
 }
