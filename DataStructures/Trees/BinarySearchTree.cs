@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Trees
 {
-	[DebuggerDisplay("Value: {Value}, Children Count: {Children.Count}")]
+	[DebuggerDisplay("Value: {Value}, ({Children[0].Value}, {Children[1].Value})")]
 	public class BinarySearchTree
 	{
 		public BinarySearchTree(int data)
@@ -22,7 +22,7 @@ namespace DataStructures.Trees
 		public void AddChild(BinarySearchTree tree)
 		{
 			int newValue = tree.Value;
-			if (newValue >= Value)
+			if (newValue < Value)
 			{
 				if (Children[0] == null)
 				{
@@ -46,24 +46,62 @@ namespace DataStructures.Trees
 			}
 		}
 
+		public BinarySearchTree Search(int data)
+		{
+
+			if (data == this.Value)
+			{
+				return this;
+			}
+			else if (data < this.Value)
+			{
+				if (Children[0] == null)
+				{
+					return null;
+				}
+				else
+				{
+					return this.Children[0].Search(data);
+				}
+			}
+			else
+			{
+				if (Children[1] == null)
+				{
+					return null;
+				}
+				return this.Children[1].Search(data);
+			}
+		}
+
+		public void RemoveChild(BinarySearchTree tree)
+		{
+			throw new NotImplementedException();
+
+		}
+
 		public void Print(string space = "")
 		{
-			if(space == "")
+			if(this == null)
 			{
-                Console.WriteLine(Value);
+                Console.WriteLine("null");
+				return;
             }
+			if (space == "")
+			{
+				Console.WriteLine(Value);
+			}
 
 			space += "  ";
 			foreach (var node in Children)
 			{
-				if(node == null)
+				if (node == null)
 				{
 					continue;
 				}
-				Console.WriteLine(space + node.Value);
 				node.Print(space);
+				Console.WriteLine(space + node.Value);
 			}
 		}
-
 	}
 }
