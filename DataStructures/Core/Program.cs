@@ -15,10 +15,11 @@ namespace DataStructures.Core
             ListLinked<IDemo> list = new ListLinked<IDemo>();
             
             IDemo stackDemo = new StackDemo();
-            IDemo treeDemo = new TreeDemo();
+            IDemo basicTreeDemo = new BasicTreeDemo();
+            IDemo binaryTreeDemo = new BinaryTreeDemo();
             
             // list.Add(stackDemo);
-            list.Add(treeDemo);
+            list.Add(binaryTreeDemo);
 
             foreach (IDemo item in list)
             {

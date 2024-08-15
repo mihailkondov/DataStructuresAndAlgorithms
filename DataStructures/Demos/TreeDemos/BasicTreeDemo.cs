@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Demos.TreeDemos
 {
-	public class TreeDemo : IDemo
+	public class BasicTreeDemo : IDemo
 	{
 		public void Run()
 		{
