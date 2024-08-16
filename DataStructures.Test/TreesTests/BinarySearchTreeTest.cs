@@ -76,7 +76,8 @@ namespace DataStructures.Tests.TreesTests
 			Assert.Throws<ArgumentException>(
 				() => { tree.RemoveChild(NUMBERS[NUMBERS.Length - 1]); },
 				TREE_DELETE_LAST_MEMBER
-);
+			);
+
 			SetUp();
 			//Cleaning up the whole tree in a different order:
 			for (int i = 0; i < NUMBERS_REORDERED.Length - 1; i++)
