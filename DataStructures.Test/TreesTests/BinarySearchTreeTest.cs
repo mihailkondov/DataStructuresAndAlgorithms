@@ -47,6 +47,65 @@ namespace DataStructures.Tests.TreesTests
 			Assert.That(result, Is.Null);
 		}
 
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(5)]
+		[TestCase(9)]
+		public void DFSFound(int testNumber)
+		{
+			BinarySearchTree result;
+
+			result = tree.DFS(testNumber);
+			if(testNumber == 5)
+			{
+				Assert.That(result, Is.EqualTo(tree));
+			}
+
+			result = tree.DFS(testNumber);
+			Assert.That(result.Value, Is.EqualTo(testNumber));
+		}
+
+		
+		[Test]
+		public void DFSNotFound()
+		{
+
+			BinarySearchTree result;
+			result = tree.DFS(NUMBER_NOT_FOUND);
+
+			Assert.That(result, Is.Null);
+		}
+
+
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(5)]
+		[TestCase(9)]
+		public void BFSFound(int testNumber)
+		{
+			BinarySearchTree result;
+
+			result = tree.BFS(testNumber);
+			if (testNumber == 5)
+			{
+				Assert.That(result, Is.EqualTo(tree));
+			}
+
+			result = tree.BFS(testNumber);
+			Assert.That(result.Value, Is.EqualTo(testNumber));
+		}
+
+
+		[Test]
+		public void BFSNotFound()
+		{
+
+			BinarySearchTree result;
+			result = tree.BFS(NUMBER_NOT_FOUND);
+
+			Assert.That(result, Is.Null);
+		}
+
 		[Test]
 		public void AddChild()
 		{

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,11 @@ namespace DataStructures.Trees
 			}
 		}
 
+		/// <summary>
+		/// Returns the node from the tree which contains the given integer value using the binary search algorithm.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
 		public BinarySearchTree Search(int data)
 		{
 
@@ -76,6 +82,75 @@ namespace DataStructures.Trees
 				}
 				return this.Children[1].Search(data);
 			}
+		}
+
+		/// <summary>
+		/// Returns the node from the tree which contains the given integer value using the depth first seach algorithm.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
+		public BinarySearchTree DFS(int data)
+		{
+			BinarySearchTree result = null;
+
+			if(Value == data)
+			{
+				result = this;
+				return result;
+			}
+
+			foreach(BinarySearchTree child in Children)
+			{
+				if (child != null)
+				{
+					result = child.DFS(data);
+					if(result != null)
+					{
+						return result;
+					}
+				}
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Returns the node from the tree which contains the given integer value using the bredth first seach algorithm.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
+		public BinarySearchTree BFS (int data)
+		{
+			if(Value == data)
+			{
+				return this;
+			}
+
+			foreach(var child in Children)
+			{
+				if (child != null)
+				{
+					if(child.Value == data)
+					{
+						return child;
+					}
+				}
+			}
+
+			foreach(var child in Children)
+			{
+				if (child != null)
+				{
+					
+					var result = child.BFS(data);
+					if(result != null)
+					{
+						return result;
+					}
+				}
+			}
+
+			return null;
 		}
 
 		public void RemoveChild(int number)
