@@ -1,5 +1,6 @@
 ﻿using DataStructures.Trees;
 using static DataStructures.Tests.TreesTests.TreesTestsConstants;
+using static DataStructures.Trees.TreeErrorMessages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,24 +66,31 @@ namespace DataStructures.Tests.TreesTests
 
 			SetUp();
 			//Cleaning up the whole tree:
-			foreach(int  i in NUMBERS)
+			for (int i = 0; i < NUMBERS.Length - 1; i++)
 			{
-				tree.RemoveChild(i);
+				tree.RemoveChild(NUMBERS[i]);
 			}
-			Assert.That(tree.Value, Is.EqualTo(0));
+			Assert.That(tree.Value, Is.EqualTo(NUMBERS[NUMBERS.Length - 1]));
 			Assert.That(tree.Children[0], Is.Null);
 			Assert.That(tree.Children[1], Is.Null);
-
+			Assert.Throws<ArgumentException>(
+				() => { tree.RemoveChild(NUMBERS[NUMBERS.Length - 1]); },
+				TREE_DELETE_LAST_MEMBER
+);
 			SetUp();
 			//Cleaning up the whole tree in a different order:
-			foreach (int i in NUMBERS_REORDERD)
+			for (int i = 0; i < NUMBERS_REORDERED.Length - 1; i++)
 			{
-				tree.RemoveChild(i);
+				tree.RemoveChild(NUMBERS_REORDERED[i]);
 			}
-			Assert.That(tree.Value, Is.EqualTo(0));
+			Assert.That(tree.Value, Is.EqualTo(NUMBERS_REORDERED[NUMBERS_REORDERED.Length - 1]));
 			Assert.That(tree.Children[0], Is.Null);
 			Assert.That(tree.Children[1], Is.Null);
 
+			Assert.Throws<ArgumentException>(
+				() => { tree.RemoveChild(NUMBERS_REORDERED[NUMBERS_REORDERED.Length - 1]); },
+				TREE_DELETE_LAST_MEMBER
+			);
 		}
 	}
 }

@@ -87,8 +87,7 @@ namespace DataStructures.Trees
 			{
 				if (Children[0] == null && Children[1] == null) //only 1 node in the tree
 				{
-					Value = 0;
-					return;										  
+					throw new ArgumentException(TreeErrorMessages.TREE_DELETE_LAST_MEMBER);
 				}												  
 				else											  
 				{
