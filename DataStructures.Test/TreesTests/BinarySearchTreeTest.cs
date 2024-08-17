@@ -57,7 +57,7 @@ namespace DataStructures.Tests.TreesTests
 			BinarySearchTree result;
 
 			result = tree.DFS(testNumber);
-			if(testNumber == 5)
+			if (testNumber == 5)
 			{
 				Assert.That(result, Is.EqualTo(tree));
 			}
@@ -66,7 +66,7 @@ namespace DataStructures.Tests.TreesTests
 			Assert.That(result.Value, Is.EqualTo(testNumber));
 		}
 
-		
+
 		[Test]
 		public void DFSNotFound()
 		{
@@ -126,9 +126,41 @@ namespace DataStructures.Tests.TreesTests
 		#region Adding nodes and values
 
 		[Test]
-		public void AddChild()
+		public void AddTreeEmpty()
 		{
 			Assert.DoesNotThrow(() => tree.AddTree(null));
+		}
+
+		[Test]
+		public void AddTreeOne()
+		{
+			BinarySearchTree newTree = new BinarySearchTree(NUMBERS[0]);
+
+			newTree.AddTree(tree);
+			Assert.That(BinarySearchTree.AreTreesIdentical(newTree, tree), Is.True);
+		}
+
+		[Test]
+		public void AddTreeFullTrees()
+		{
+			BinarySearchTree newTree = new BinarySearchTree(NUMBERS[0]);
+			BinarySearchTree halfTree = new BinarySearchTree(NUMBERS[NUMBERS.Length / 2]);
+
+			for (int i = 1; i < NUMBERS[NUMBERS.Length / 2] + 1 / 2; i++)
+			{
+				newTree.AddTree(new BinarySearchTree(NUMBERS[i]));
+			}
+
+			for (int i = NUMBERS[NUMBERS.Length / 2] + 1; i < NUMBERS.Length / 2; i++)
+			{
+				halfTree.AddTree(new BinarySearchTree(NUMBERS[i]));
+			}
+
+			Assert.DoesNotThrow(() => newTree.AddTree(halfTree));
+			Assert.That(newTree, Is.Not.Null);
+			
+			//The following line would only work once I implement a balancing algorithm, I supose
+			//Assert.That(BinarySearchTree.AreTreesIdentical(tree, newTree), Is.True);
 		}
 
 		[Test]

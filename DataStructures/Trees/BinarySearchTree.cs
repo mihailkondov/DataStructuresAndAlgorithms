@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
+﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataStructures.Trees
 {
@@ -21,36 +15,33 @@ namespace DataStructures.Trees
 
 		public int Value { get; set; }
 
-		// Gotta fix this one. Currently appends the given tree based on its root value,
-		// but I want it to use DFS to fetch and add each member to the tree one by one.
+		/// <summary>
+		/// Adds each node to the current tree from the tree given as argument in a bredth first manner.
+		/// </summary>
+		/// <param name="tree"></param>
 		public void AddTree(BinarySearchTree tree)
 		{
-			if (tree == null)
-				return;
+			if (tree == null) return;
 
-			int newValue = tree.Value;
-			if (newValue < Value)
+			Queue<BinarySearchTree> queue = new Queue<BinarySearchTree>();
+			queue.Enqueue(tree);
+
+			while(queue.Count > 0)
 			{
-				if (Children[0] == null)
+				BinarySearchTree current = queue.Dequeue();
+				AddValue(current.Value);
+
+				if (current.Children[0]  != null)
 				{
-					Children[0] = tree;
+					queue.Enqueue(current.Children[0]);
 				}
-				else
+
+				if (current.Children[1] != null)
 				{
-					Children[0].AddTree(tree);
+					queue.Enqueue(current.Children[1]);
 				}
 			}
-			else
-			{
-				if (Children[1] == null)
-				{
-					Children[1] = tree;
-				}
-				else
-				{
-					Children[1].AddTree(tree);
-				}
-			}
+
 		}
 
 		/// <summary>
@@ -136,7 +127,7 @@ namespace DataStructures.Trees
 			if (tree1 == null && tree2 == null)
 				return true;
 
-			if(tree1 == null || tree2 == null)
+			if (tree1 == null || tree2 == null)
 				return false;
 
 			if (tree1.Value != tree2.Value)
