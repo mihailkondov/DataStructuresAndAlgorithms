@@ -21,7 +21,7 @@ namespace DataStructures.Tests.TreesTests
 			tree = new BinarySearchTree(NUMBERS[0]);
 			for (int i = 1; i < NUMBERS.Length; i++)
 			{
-				tree.AddChild(new BinarySearchTree(NUMBERS[i]));
+				tree.AddTree(new BinarySearchTree(NUMBERS[i]));
 			}
 
 		}
@@ -109,17 +109,41 @@ namespace DataStructures.Tests.TreesTests
 		[Test]
 		public void AddChild()
 		{
-			Assert.DoesNotThrow(() => tree.AddChild(null));
+			Assert.DoesNotThrow(() => tree.AddTree(null));
+		}
+
+		[Test]
+		public void AreTreesIdentical()
+		{
+			Assert.That(BinarySearchTree.AreTreesIdentical(null, null), Is.True);
+			Assert.That(BinarySearchTree.AreTreesIdentical(tree, tree), Is.True);
+			Assert.That(BinarySearchTree.AreTreesIdentical(tree, new BinarySearchTree(NUMBERS[0])), Is.False);
+			Assert.That(BinarySearchTree.AreTreesIdentical(new BinarySearchTree(NUMBERS[0]), new BinarySearchTree(NUMBERS[0])), Is.True);
+
+		}
+		
+		[Test]
+		public void AddValue()
+		{
+			BinarySearchTree newTree = new BinarySearchTree(NUMBERS[0]);
+			for (int i = 1; i < NUMBERS.Length; i++)
+			{
+				newTree.AddValue(NUMBERS[i]);
+			}
+
+			Assert.That(tree.Value, Is.EqualTo(newTree.Value));
+			Assert.That(BinarySearchTree.AreTreesIdentical(tree, newTree), Is.True);
+
 		}
 
 		[Test]
 		public void RemoveChild()
 		{
-			tree.RemoveChild(9);
+			tree.RemoveNode(9);
 			Assert.That(tree.Children[1].Value, Is.EqualTo(7));
 
 			SetUp();
-			tree.RemoveChild(2);
+			tree.RemoveNode(2);
 			Assert.That(tree.Children[0].Value, Is.EqualTo(1));
 			Assert.That(tree.Children[0].Children[1].Value, Is.EqualTo(3));
 
@@ -127,13 +151,13 @@ namespace DataStructures.Tests.TreesTests
 			//Cleaning up the whole tree:
 			for (int i = 0; i < NUMBERS.Length - 1; i++)
 			{
-				tree.RemoveChild(NUMBERS[i]);
+				tree.RemoveNode(NUMBERS[i]);
 			}
 			Assert.That(tree.Value, Is.EqualTo(NUMBERS[NUMBERS.Length - 1]));
 			Assert.That(tree.Children[0], Is.Null);
 			Assert.That(tree.Children[1], Is.Null);
 			Assert.Throws<ArgumentException>(
-				() => { tree.RemoveChild(NUMBERS[NUMBERS.Length - 1]); },
+				() => { tree.RemoveNode(NUMBERS[NUMBERS.Length - 1]); },
 				TREE_DELETE_LAST_MEMBER
 			);
 
@@ -141,14 +165,14 @@ namespace DataStructures.Tests.TreesTests
 			//Cleaning up the whole tree in a different order:
 			for (int i = 0; i < NUMBERS_REORDERED.Length - 1; i++)
 			{
-				tree.RemoveChild(NUMBERS_REORDERED[i]);
+				tree.RemoveNode(NUMBERS_REORDERED[i]);
 			}
 			Assert.That(tree.Value, Is.EqualTo(NUMBERS_REORDERED[NUMBERS_REORDERED.Length - 1]));
 			Assert.That(tree.Children[0], Is.Null);
 			Assert.That(tree.Children[1], Is.Null);
 
 			Assert.Throws<ArgumentException>(
-				() => { tree.RemoveChild(NUMBERS_REORDERED[NUMBERS_REORDERED.Length - 1]); },
+				() => { tree.RemoveNode(NUMBERS_REORDERED[NUMBERS_REORDERED.Length - 1]); },
 				TREE_DELETE_LAST_MEMBER
 			);
 		}

@@ -16,7 +16,7 @@ namespace DataStructures.Demos.TreeDemos
 			BinarySearchTree tree = new BinarySearchTree(numbers[0]);
 			for (int i = 1; i < numbers.Length; i++)
 			{
-				tree.AddChild(new BinarySearchTree(numbers[i]));
+				tree.AddTree(new BinarySearchTree(numbers[i]));
 			}
 
 			tree.Print();
