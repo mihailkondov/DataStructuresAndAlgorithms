@@ -26,6 +26,7 @@ namespace DataStructures.Tests.TreesTests
 
 		}
 
+		#region Search functionality
 		[Test]
 		public void SearchFound()
 		{
@@ -106,12 +107,9 @@ namespace DataStructures.Tests.TreesTests
 			Assert.That(result, Is.Null);
 		}
 
-		[Test]
-		public void AddChild()
-		{
-			Assert.DoesNotThrow(() => tree.AddTree(null));
-		}
+		#endregion
 
+		#region Comparison functionality
 		[Test]
 		public void AreTreesIdentical()
 		{
@@ -121,7 +119,18 @@ namespace DataStructures.Tests.TreesTests
 			Assert.That(BinarySearchTree.AreTreesIdentical(new BinarySearchTree(NUMBERS[0]), new BinarySearchTree(NUMBERS[0])), Is.True);
 
 		}
-		
+
+
+		#endregion
+
+		#region Adding nodes and values
+
+		[Test]
+		public void AddChild()
+		{
+			Assert.DoesNotThrow(() => tree.AddTree(null));
+		}
+
 		[Test]
 		public void AddValue()
 		{
@@ -136,6 +145,9 @@ namespace DataStructures.Tests.TreesTests
 
 		}
 
+		#endregion
+
+		#region Removing nodes and values
 		[Test]
 		public void RemoveChild()
 		{
@@ -176,5 +188,6 @@ namespace DataStructures.Tests.TreesTests
 				TREE_DELETE_LAST_MEMBER
 			);
 		}
+		#endregion
 	}
 }
