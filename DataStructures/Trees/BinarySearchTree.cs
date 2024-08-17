@@ -78,6 +78,26 @@ namespace DataStructures.Trees
 		}
 
 		/// <summary>
+		/// Compares two BinarySearchTrees by their values and their children's values
+		/// </summary>
+		/// <param name="tree1"></param>
+		/// <param name="tree2"></param>
+		/// <returns></returns>
+		public static bool AreTreesIdentical(BinarySearchTree? tree1, BinarySearchTree? tree2)
+		{
+			if (tree1 == null && tree2 == null)
+				return true;
+
+			if (tree1 == null || tree2 == null)
+				return false;
+
+			if (tree1.Value != tree2.Value)
+				return false;
+
+			return AreTreesIdentical(tree1.Children[0], tree2.Children[0]) && AreTreesIdentical(tree1.Children[1], tree2.Children[1]);
+		}
+
+		/// <summary>
 		/// Returns the node from the tree which contains the given integer value using the bredth first seach algorithm.
 		/// </summary>
 		/// <param name="data"></param>
@@ -117,26 +137,6 @@ namespace DataStructures.Trees
 		}
 
 		/// <summary>
-		/// Compares two BinarySearchTrees by their values and their children's values
-		/// </summary>
-		/// <param name="tree1"></param>
-		/// <param name="tree2"></param>
-		/// <returns></returns>
-		public static bool AreTreesIdentical(BinarySearchTree? tree1, BinarySearchTree? tree2)
-		{
-			if (tree1 == null && tree2 == null)
-				return true;
-
-			if (tree1 == null || tree2 == null)
-				return false;
-
-			if (tree1.Value != tree2.Value)
-				return false;
-
-			return AreTreesIdentical(tree1.Children[0], tree2.Children[0]) && AreTreesIdentical(tree1.Children[1], tree2.Children[1]);
-		}
-
-		/// <summary>
 		/// Returns the node from the tree which contains the given integer value using the depth first seach algorithm.
 		/// </summary>
 		/// <param name="data"></param>
@@ -164,6 +164,34 @@ namespace DataStructures.Trees
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Prints the tree in the console.
+		/// </summary>
+		/// <param name="space"></param>
+		public void Print(string space = "")
+		{
+			if (this == null)
+			{
+				Console.WriteLine("null");
+				return;
+			}
+			if (space == "")
+			{
+				Console.WriteLine(Value);
+			}
+
+			space += "  ";
+			foreach (var node in Children)
+			{
+				if (node == null)
+				{
+					continue;
+				}
+				node.Print(space);
+				Console.WriteLine(space + node.Value);
+			}
 		}
 
 		/// <summary>
@@ -261,34 +289,6 @@ namespace DataStructures.Trees
 				}
 			}
 			throw new WarningException("Item not found");
-		}
-
-		/// <summary>
-		/// Prints the tree in the console.
-		/// </summary>
-		/// <param name="space"></param>
-		public void Print(string space = "")
-		{
-			if (this == null)
-			{
-				Console.WriteLine("null");
-				return;
-			}
-			if (space == "")
-			{
-				Console.WriteLine(Value);
-			}
-
-			space += "  ";
-			foreach (var node in Children)
-			{
-				if (node == null)
-				{
-					continue;
-				}
-				node.Print(space);
-				Console.WriteLine(space + node.Value);
-			}
 		}
 
 		/// <summary>
