@@ -14,13 +14,13 @@
             int[] numbers = new int[len];
             for (int i = 0; i < numbers.Length; i++)
             {
-                numbers[i] = random.Next() % len + 1; // Draw current number
+                numbers[i] = random.Next(1, len + 1); // Draw current number
 
                 for (int j = 0; j < i; j++) // Check it is a repeat
                 {
                     if (numbers[j] == numbers[i])
                     {
-                        numbers[i] = random.Next() % len + 1;
+                        numbers[i] = random.Next(1, len + 1);
                         j = -1; // reset loop
                     }
                 }
